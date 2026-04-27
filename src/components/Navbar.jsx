@@ -22,7 +22,7 @@ export default function Navbar() {
 
         <nav className="nav-links desktop">
           {links.map((l) => (
-            <NavLink key={l.to} to={l.to} className="nav-link">{l.label}</NavLink>
+            <NavLink key={l.to} to={l.to} className="btn ghost">{l.label}</NavLink>
           ))}
           <LanguageToggle />
         </nav>
@@ -34,7 +34,7 @@ export default function Navbar() {
         {open && (
           <motion.div className="mobile-menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             {links.map((l) => (
-              <NavLink key={l.to} to={l.to} className="mobile-link" onClick={() => setOpen(false)}>{l.label}</NavLink>
+              <NavLink key={l.to} to={l.to} className="btn ghost" onClick={() => setOpen(false)}>{l.label}</NavLink>
             ))}
             <LanguageToggle />
           </motion.div>

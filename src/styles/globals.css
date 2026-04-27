@@ -1,13 +1,24 @@
 :root {
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #111111;
-  --bg-card: #161616;
-  --border: #222222;
-  --accent: #4fffb0;
-  --accent-dim: rgba(79, 255, 176, 0.12);
-  --text-primary: #f0f0f0;
-  --text-secondary: #888888;
-  --text-muted: #444444;
+  --font-sans: "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-display: "Space Grotesk", "Inter", "Noto Sans SC", sans-serif;
+
+  --bg: #070b14;
+  --panel: #0f1628;
+  --line: rgba(255, 255, 255, 0.10);
+  --text: #eaf1ff;
+  --muted: #9fb0d0;
+  --brand: #7c8cff;
+  --brand2: #58d0ff;
+
+  --bg-primary: var(--bg);
+  --bg-secondary: var(--panel);
+  --bg-card: var(--panel);
+  --border: var(--line);
+  --accent: var(--brand);
+  --accent-dim: rgba(124, 140, 255, 0.12);
+  --text-primary: var(--text);
+  --text-secondary: var(--muted);
+  --text-muted: rgba(159, 176, 208, 0.5);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -18,20 +29,31 @@
 html, body, #root { margin: 0; padding: 0; min-height: 100%; }
 
 body {
-  background: var(--bg-primary);
+  background:
+    radial-gradient(1200px 700px at 85% -10%, rgba(124, 140, 255, 0.20), transparent 55%),
+    radial-gradient(900px 500px at -10% 10%, rgba(88, 208, 255, 0.12), transparent 55%),
+    var(--bg);
   color: var(--text-primary);
-  font-family: "DM Sans", system-ui, sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
 a { color: inherit; text-decoration: none; }
 
+h1, h2, h3, .display { font-family: var(--font-display); letter-spacing: -0.02em; }
+h1 { font-size: clamp(40px, 7vw, 72px); font-weight: 700; line-height: 1.05; }
+h2 { font-size: clamp(28px, 4vw, 44px); font-weight: 700; }
+
 .app-shell { min-height: 100vh; }
 
-.page-main {
-  padding-top: 64px;
-  min-height: calc(100vh - 64px);
+.page-main { max-width: 1200px; margin: 0 auto; padding: 32px 20px 80px; }
+.section { margin: 56px 0; }
+.grid-2 { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 24px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+
+@media (max-width: 980px) {
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
 }
 
 .container {
@@ -46,45 +68,67 @@ a { color: inherit; text-decoration: none; }
   color: var(--text-secondary);
 }
 
+.card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--line);
+  border-radius: 18px;
+}
+
 .btn {
-  border-radius: 6px;
-  padding: 12px 28px;
-  border: 1px solid var(--border);
-  transition: all 200ms var(--ease-out-expo);
+  height: 44px;
+  padding: 0 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08));
+  color: #eef1ff;
+  font-weight: 600;
+  font-size: 14px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   cursor: pointer;
-  font-weight: 500;
+}
+.btn:hover {
+  transform: translateY(-1px);
+  border-color: rgba(124, 140, 255, 0.65);
+  box-shadow: 0 10px 24px rgba(80, 110, 255, 0.25);
+}
+.btn:active { transform: translateY(0); }
+
+.btn.primary {
+  background: linear-gradient(135deg, #7c8cff 0%, #58d0ff 100%);
+  border-color: transparent;
+  color: #fff;
+}
+.btn.ghost {
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .btn-primary {
-  background: var(--accent);
-  color: #000;
-  border-color: var(--accent);
+  background: linear-gradient(135deg, #7c8cff 0%, #58d0ff 100%);
+  border-color: transparent;
+  color: #fff;
 }
 .btn-primary:hover { transform: translateY(-2px); }
 
 .btn-secondary {
   background: transparent;
   color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.18);
 }
 .btn-secondary:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.card {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  border-color: rgba(124, 140, 255, 0.65);
+  color: var(--brand);
 }
 
 .section-title {
-  font-family: "Syne", sans-serif;
-  font-size: 48px;
-  font-weight: 800;
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
   margin: 0 0 8px;
+  letter-spacing: -0.02em;
 }
 
 .mono {

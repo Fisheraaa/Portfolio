@@ -18,8 +18,8 @@ export default function Hero() {
           <div style={{ width: 40, height: 1, background: 'var(--accent)', margin: '24px 0' }} />
           <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.45 }} style={{ color: 'var(--text-secondary)' }}>{t('hero.intro')}</motion.p>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.55 }} style={{ marginTop: 40, display: 'flex', gap: 12 }}>
-            <Link className="btn btn-primary" to="/projects">{t('hero.ctaProjects')} →</Link>
-            <Link className="btn btn-secondary" to="/about">{t('hero.ctaAbout')}</Link>
+            <Link className="btn primary" to="/projects">{t('hero.ctaProjects')} →</Link>
+            <Link className="btn ghost" to="/about">{t('hero.ctaAbout')}</Link>
           </motion.div>
         </div>
         <motion.div className="hero-right card" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }}>
