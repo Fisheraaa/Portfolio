@@ -32,7 +32,7 @@ export default function Navbar() {
 
       <AnimatePresence>
         {open && (
-          <motion.div className="mobile-menu" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+          <motion.div className="mobile-menu open" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
             {links.map((l) => (
               <NavLink key={l.to} to={l.to} className="btn ghost" onClick={() => setOpen(false)}>{l.label}</NavLink>
             ))}
