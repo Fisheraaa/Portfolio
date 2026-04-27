@@ -1,0 +1,29 @@
+{
+  "nav": { "about": "关于", "projects": "项目", "blog": "思考", "contact": "联系" },
+  "hero": {
+    "badge": "AVAILABLE FOR INTERNSHIP 2026",
+    "name": "俞秋行",
+    "subtitle": "CS @ BNU-HKBU UIC\nQuant Trader · Strategy Research · PM",
+    "intro": "喜欢把模糊的东西搞清楚，不管是一个市场信号，还是一个系统为什么会挂",
+    "ctaProjects": "查看项目",
+    "ctaAbout": "关于我"
+  },
+  "about": {
+    "title": "关于我 / About",
+    "whoami": "> whoami",
+    "intro": "香港浸会大学（珠海）计算机科学的小大一。想去 Quant Trader / Strategy Research / PM。喜欢把模糊的东西搞清楚——不管是一个市场信号，还是一段关系，还是一个系统为什么会挂。现在在把 AI Trader 从「看行情」改成「能回测、有风控」，还在迭代中。"
+  },
+  "projects": {
+    "title": "项目 / Projects",
+    "viewDetail": "查看详情",
+    "github": "GitHub"
+  },
+  "blog": {
+    "title": "思考 / Blog",
+    "readMore": "阅读"
+  },
+  "contact": {
+    "title": "打个招呼 / Say Hi",
+    "subtitle": "找实习 / 合作 / 随便聊都行"
+  }
+}

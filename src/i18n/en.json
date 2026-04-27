@@ -1,0 +1,29 @@
+{
+  "nav": { "about": "About", "projects": "Projects", "blog": "Blog", "contact": "Contact" },
+  "hero": {
+    "badge": "AVAILABLE FOR INTERNSHIP 2026",
+    "name": "Yu Qiuhang",
+    "subtitle": "CS @ BNU-HKBU UIC\nQuant Trader · Strategy Research · PM",
+    "intro": "I enjoy making fuzzy things clear, whether it's a market signal or why a system crashes.",
+    "ctaProjects": "View Projects",
+    "ctaAbout": "About Me"
+  },
+  "about": {
+    "title": "About / 关于我",
+    "whoami": "> whoami",
+    "intro": "First-year CS student at BNU-HKBU UIC. Targeting Quant Trader / Strategy Research / PM. I enjoy making fuzzy things clear—whether it's a market signal, a relationship dynamic, or why a system fails. I’m evolving AI Trader from a market watcher into a backtestable and risk-aware system."
+  },
+  "projects": {
+    "title": "Projects / 项目",
+    "viewDetail": "View Detail",
+    "github": "GitHub"
+  },
+  "blog": {
+    "title": "Blog / 思考",
+    "readMore": "Read"
+  },
+  "contact": {
+    "title": "Say Hi / 打个招呼",
+    "subtitle": "Open for internships, collaborations, or casual chats."
+  }
+}
