@@ -7,7 +7,6 @@ export default function ProjectModal({ isOpen, onClose, project }) {
   const { t, i18n } = useTranslation();
   const isZh = i18n.language === 'zh';
 
-  // ESC 关闭
   useEffect(() => {
     const onKey = (e) => { if (e.key === 'Escape') onClose(); };
     if (isOpen) window.addEventListener('keydown', onKey);
@@ -16,8 +15,8 @@ export default function ProjectModal({ isOpen, onClose, project }) {
 
   if (!project) return null;
 
-  const detail   = isZh ? project.detailZh   : project.detailEn;
-  const title    = isZh ? project.titleZh    : project.titleEn;
+  const detail = isZh ? project.detailZh : project.detailEn;
+  const title  = isZh ? project.titleZh  : project.titleEn;
 
   return (
     <AnimatePresence>
@@ -39,15 +38,27 @@ export default function ProjectModal({ isOpen, onClose, project }) {
           >
             <button className="modal-close" onClick={onClose} aria-label="Close">×</button>
 
-            {/* 占位图区 */}
-            <div className="modal-img-placeholder">
-              {t('projects.screenshotSoon')}
-            </div>
+            {/* 截图区 */}
+            {project.image ? (
+              <div className="modal-img-wrap">
+                <img
+                  src={project.image}
+                  alt={title}
+                  className="modal-img"
+                  onError={e => {
+                    e.currentTarget.parentElement.innerHTML =
+                      '<div class="modal-img-placeholder">SCREENSHOT COMING SOON</div>';
+                  }}
+                />
+              </div>
+            ) : (
+              <div className="modal-img-placeholder">SCREENSHOT COMING SOON</div>
+            )}
 
             {/* 标题 & 状态 */}
             <div className="modal-header">
               <h2 className="modal-title title-italic">{title}</h2>
-              <span className={project.status === 'active' ? 'status-active' : 'status-done'} style={{ fontSize: 11 }}>
+              <span className={project.status === 'active' ? 'status-active' : 'status-done'} style={{ fontSize: 11, flexShrink: 0 }}>
                 {detail.status}
               </span>
             </div>
@@ -72,13 +83,8 @@ export default function ProjectModal({ isOpen, onClose, project }) {
               ))}
             </ul>
 
-            {/* GitHub 链接 — 文字链接风格，不是大按钮 */}
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noreferrer"
-              className="modal-github-link"
-            >
+            {/* GitHub */}
+            <a href={project.github} target="_blank" rel="noreferrer" className="modal-github-link">
               {t('projects.github')} ↗
             </a>
           </motion.div>

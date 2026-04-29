@@ -1,3 +1,8 @@
+// 图片放在 /public/images/ 下，文件名如下：
+// AI_Trader_demo.jpg
+// Persona_demo1.png
+// ETHanormaly_demo.png
+
 export const projects = [
   {
     id: '01',

@@ -1,4 +1,28 @@
-/* ── 在原有 ProjectModal.css 末尾追加以下样式 ── */
+/* 追加到原有 ProjectModal.css 末尾 */
+
+.modal-img-wrap {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.modal-img {
+  width: 100%;
+  height: auto;
+  max-height: 280px;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+
+.modal-img:hover {
+  opacity: 1;
+}
 
 .modal-header {
   display: flex;
@@ -61,8 +85,8 @@
   opacity: 0.7;
   text-decoration: none;
   transition: opacity 0.2s;
-  border: none;
   background: none;
+  border: none;
 }
 
 .modal-github-link:hover {
