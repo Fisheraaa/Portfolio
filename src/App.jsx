@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Starfield from './components/Starfield';
+import GlobalDecorations from './components/GlobalDecorations';
 
 const Hero = lazy(() => import('./pages/Hero'));
 const About = lazy(() => import('./pages/About'));
@@ -17,7 +17,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
-      <Starfield />
+      <GlobalDecorations />
       <Navbar />
       <main className="page-main">
         <Suspense fallback={<div className="loading">Loading...</div>}>

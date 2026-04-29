@@ -9,30 +9,32 @@
     "badge":       "AVAILABLE FOR INTERNSHIP 2026",
     "heading":     "个人主页",
     "subheading":  "Yu Qiuxing · BNU-HKBU UIC",
-    "intro":       "喜欢把模糊的东西搞清楚——不管是一个市场信号，还是一段关系，还是一个系统为什么会挂。",
+    "intro":       "喜欢把模糊的东西搞清楚——不管是一个市场信号，还是一段关系，还是一个系统为什么会挂",
     "ctaProjects": "查看项目",
     "ctaAbout":    "关于我"
   },
   "about": {
     "title":   "关于我",
     "whoami":  "> whoami",
-    "intro":   "香港浸会大学（珠海）计算机科学的小大一。\n\n想去 Quant Trader / Strategy Research / PM。\n\n喜欢把模糊的东西搞清楚——不管是一个市场信号，还是一段关系，还是一个系统为什么会挂。\n\n现在在把 AI Trader 从「看行情」改成「能回测、有风控」，还在迭代中。",
+    "intro":   "香港浸会大学（珠海）计算机科学的小大一\n\n想去 Quant Trader / Strategy Research / PM\n\n喜欢把模糊的东西搞清楚——不管是一个市场信号，还是一段关系，还是一个系统为什么会挂\n\n现在在把 AI Trader 从「看行情」改成「能回测、有风控」，还在迭代中",
     "edu":     "教育 & 竞赛",
     "skills":  "技能"
   },
   "projects": {
-    "title":      "项目",
-    "viewDetail": "查看详情",
-    "github":     "GitHub",
-    "active":     "进行中",
-    "done":       "已完成",
-    "techStack":  "技术栈",
-    "highlights": "核心亮点",
-    "screenshotSoon": "截图即将上线"
+    "title":         "项目",
+    "viewDetail":    "查看详情",
+    "github":        "GitHub",
+    "active":        "进行中",
+    "done":          "已完成",
+    "techStack":     "技术栈",
+    "highlights":    "核心亮点",
+    "background":    "背景",
+    "screenshotSoon":"截图即将上线"
   },
   "blog": {
     "title":    "思考",
-    "readMore": "阅读"
+    "expand":   "展开阅读",
+    "readMore": "展开阅读"
   },
   "contact": {
     "title":    "打个招呼",

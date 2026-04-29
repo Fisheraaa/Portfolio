@@ -72,7 +72,7 @@ export default function ProjectModal({ isOpen, onClose, project }) {
             </div>
 
             {/* 背景 */}
-            <div className="modal-section-label">{isZh ? '背景' : 'Background'}</div>
+            <div className="modal-section-label">{t('projects.background')}</div>
             <p className="modal-bg">{detail.background}</p>
 
             {/* 核心亮点 */}

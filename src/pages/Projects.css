@@ -1,124 +1,87 @@
+/* ── 页面容器 ── */
 .projects-section {
-  padding: 120px 64px;
-  max-width: 1200px;
-  margin: 0 auto;
+  min-height: 100vh;
+  padding: 120px 0 120px;
+  position: relative;
+  z-index: 10;
 }
 
 .section-title {
-  font-size: 40px;
-  margin-bottom: 60px;
+  font-size: 48px;
   color: var(--text-1);
+  margin-bottom: 56px;
+  letter-spacing: -0.01em;
 }
 
+/* ── 卡片网格 ── */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 24px;
 }
 
+/* ── 单个项目卡片 ── */
 .project-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 28px;
+  border-radius: 14px;
+  padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  cursor: pointer;
+  gap: 18px;
   transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  cursor: pointer;
 }
-
 .project-card:hover {
-  border-color: rgba(79, 255, 176, 0.25);
+  border-color: rgba(201,168,76,0.28);
   transform: translateY(-5px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(79, 255, 176, 0.04);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.04);
 }
 
 .card-header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-}
-
-.status-active, .status-done {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  padding: 3px 8px;
-  border-radius: 3px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.status-active {
-  color: var(--accent);
-  background: rgba(79, 255, 176, 0.08);
-  border: 1px solid rgba(79, 255, 176, 0.2);
-}
-.status-active::before {
-  content: '';
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--accent);
-  animation: pulse 2s infinite;
-}
-
-.status-done {
-  color: var(--text-3);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
 }
 
 .card-num {
   font-family: var(--font-mono);
-  color: var(--text-3);
-  font-size: 14px;
+  font-size: 48px;
+  font-weight: 700;
+  color: rgba(201,168,76,0.06);
+  line-height: 1;
 }
 
 .card-title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 22px;
+  font-family: var(--font-zh);
+  font-size: 18px;
+  font-weight: 600;
   color: var(--text-1);
-}
-
-.tech-tags {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.tech-tag {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-2);
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  padding: 3px 8px;
-  border-radius: 3px;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.02em;
 }
 
 .card-divider {
+  width: 100%;
   height: 1px;
-  background: var(--border);
+  background: rgba(201,168,76,0.06);
   border: none;
-  margin: 4px 0;
+  margin: 0;
 }
 
 .card-desc {
-  font-family: var(--font-body);
+  font-family: var(--font-zh);
   font-size: 13px;
+  font-weight: 300;
   color: var(--text-2);
-  line-height: 1.7;
-  flex-grow: 1; /* 让下方内容撑满对齐 */
+  line-height: 1.75;
+  margin: 0;
+  letter-spacing: 0.03em;
 }
 
-/* 移动端 */
-@media (max-width: 960px) {
+/* ── 响应式 ── */
+@media (max-width: 1100px) {
   .projects-grid { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 768px) {
-  .projects-section { padding: 100px 24px; }
+@media (max-width: 700px) {
   .projects-grid { grid-template-columns: 1fr; }
 }

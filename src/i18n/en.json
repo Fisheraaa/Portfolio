@@ -2,41 +2,43 @@
   "nav": {
     "about":    "About",
     "projects": "Projects",
-    "blog":     "Blog",
+    "blog":     "Thoughts",
     "contact":  "Contact"
   },
   "hero": {
     "badge":       "AVAILABLE FOR INTERNSHIP 2026",
     "heading":     "Portfolio",
     "subheading":  "Yu Qiuxing · BNU-HKBU UIC",
-    "intro":       "I enjoy making fuzzy things clear — whether it's a market signal, a relationship dynamic, or why a system fails.",
+    "intro":       "I enjoy making fuzzy things clear — whether it's a market signal, a relationship dynamic, or why a system fails",
     "ctaProjects": "View Projects",
     "ctaAbout":    "About Me"
   },
   "about": {
     "title":   "About",
     "whoami":  "> whoami",
-    "intro":   "First-year CS student at BNU-HKBU UIC.\n\nAiming for Quant Trader / Strategy Research / PM.\n\nI enjoy making fuzzy things clear — whether it's a market signal, a relationship dynamic, or why a system fails.\n\nCurrently evolving AI Trader from a market watcher into a backtestable, risk-aware system. Still iterating.",
+    "intro":   "First-year CS student at BNU-HKBU UIC\n\nAiming for Quant Trader / Strategy Research / PM\n\nI enjoy making fuzzy things clear — whether it's a market signal, a relationship dynamic, or why a system fails\n\nCurrently evolving AI Trader from a market watcher into a backtestable, risk-aware system — still iterating",
     "edu":     "Education & Awards",
     "skills":  "Skills"
   },
   "projects": {
-    "title":      "Projects",
-    "viewDetail": "View Details",
-    "github":     "GitHub",
-    "active":     "IN PROGRESS",
-    "done":       "COMPLETED",
-    "techStack":  "Tech Stack",
-    "highlights": "Highlights",
-    "screenshotSoon": "SCREENSHOT COMING SOON"
+    "title":         "Projects",
+    "viewDetail":    "View Details",
+    "github":        "GitHub",
+    "active":        "IN PROGRESS",
+    "done":          "COMPLETED",
+    "techStack":     "Tech Stack",
+    "highlights":    "Highlights",
+    "background":    "Background",
+    "screenshotSoon":"SCREENSHOT COMING SOON"
   },
   "blog": {
-    "title":    "Blog",
+    "title":    "Thoughts",
+    "expand":   "Read",
     "readMore": "Read"
   },
   "contact": {
     "title":    "Say Hi",
-    "subtitle": "Open for internships, collaborations, or casual chats.",
+    "subtitle": "Open for internships, collaborations, or casual chats",
     "copied":   "Copied!"
   }
 }

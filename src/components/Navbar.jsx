@@ -16,7 +16,10 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => setMenuOpen(false), [location.pathname]);
+  useEffect(() => {
+    const handlePathChange = () => setMenuOpen(false);
+    handlePathChange();
+  }, [location.pathname]);
 
   const navItems = [
     { path: '/about',    labelKey: 'nav.about' },
