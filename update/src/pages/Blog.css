@@ -1,4 +1,3 @@
-/* ── 页面容器 ── */
 .blog-section {
   min-height: 100vh;
   padding: 120px 0 120px;
@@ -6,28 +5,19 @@
   z-index: 10;
 }
 
-/* 居中内容区，桌面端 max-width 限制 */
 .blog-inner {
   max-width: 960px;
   margin: 0 auto;
-  padding: 0 64px;
+  padding: 0 72px;
 }
 
-.section-title {
-  font-size: 48px;
-  color: var(--text-1);
-  margin-bottom: 56px;
-  letter-spacing: -0.01em;
-}
-
-/* ── 卡片网格：桌面两列 ── */
 .blog-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
 }
 
-/* ── 单张卡片 ── */
+/* ── 卡片 ── */
 .blog-card {
   position: relative;
   background: var(--bg-card);
@@ -46,7 +36,6 @@
   box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 40px rgba(201,168,76,0.04);
 }
 
-/* meta 行 */
 .blog-card-meta {
   display: flex;
   align-items: center;
@@ -71,27 +60,25 @@
   letter-spacing: 0.06em;
 }
 
-/* 卡片标题 */
 .blog-card-title {
-  font-size: 19px;
-  font-weight: 700;
-  color: var(--text-1);
-  line-height: 1.4;
-  margin: 0;
   font-family: var(--font-zh);
+  font-size: 19px;
+  font-weight: 400;
   font-style: normal;
+  color: var(--text-1);
+  line-height: 1.45;
+  margin: 0;
 }
 
-/* 摘要 */
 .blog-card-summary {
-  font-size: 13px;
+  font-family: var(--font-zh);
+  font-size: 14px;
+  font-weight: 300;
   color: var(--text-2);
   line-height: 1.8;
-  font-family: var(--font-zh);
-  font-weight: 300;
+  letter-spacing: 0.025em;
 }
 
-/* 小节预览列表 */
 .blog-section-list {
   list-style: none;
   padding: 0;
@@ -103,138 +90,119 @@
   gap: 5px;
 }
 .blog-section-list li {
-  font-size: 11.5px;
+  font-family: var(--font-zh);
+  font-size: 12px;
+  font-weight: 300;
   color: var(--text-3);
   line-height: 1.55;
-  font-family: var(--font-zh);
-  font-weight: 300;
   transition: color 0.2s;
+  letter-spacing: 0.02em;
 }
 .blog-card:hover .blog-section-list li { color: var(--text-2); }
 
 /* ── Modal ── */
 .blog-modal-box {
-  max-width: 740px !important;
+  max-width: 760px !important;
   max-height: 86vh;
   overflow-y: auto;
 }
-
 .blog-modal-meta {
   display: flex;
   align-items: center;
   gap: 16px;
   margin-bottom: 18px;
 }
-
 .blog-modal-title {
   font-family: var(--font-zh);
   font-style: normal;
   font-size: 26px;
-  font-weight: 600;
+  font-weight: 400;
   color: var(--text-1);
   line-height: 1.35;
   margin: 0 0 36px;
   letter-spacing: 0.02em;
 }
 
-/* ── 小节 ── */
-.blog-modal-sections {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
+.blog-modal-sections { display: flex; flex-direction: column; gap: 40px; }
+
 .blog-modal-section {
   border-left: 2px solid rgba(201,168,76,0.18);
   padding-left: 22px;
 }
 .blog-modal-section-title {
   font-family: var(--font-zh);
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 600;
   font-style: normal;
   color: var(--accent);
-  opacity: 0.8;
+  opacity: 0.82;
   margin: 0 0 16px;
   letter-spacing: 0.02em;
 }
-.blog-modal-content {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+.blog-modal-content { display: flex; flex-direction: column; gap: 10px; }
 
-/* ── 内容 block 样式 ── */
+/* content blocks */
 .blog-para {
   font-family: var(--font-zh);
-  font-size: 14px;
+  font-size: 14.5px;
   font-weight: 300;
   color: var(--text-2);
   line-height: 1.9;
   margin: 0;
   letter-spacing: 0.03em;
 }
-
 .blog-blockquote {
   border-left: 2px solid var(--accent);
   margin: 4px 0;
-  padding: 6px 0 6px 16px;
+  padding: 7px 0 7px 18px;
   font-family: var(--font-zh);
-  font-size: 13.5px;
+  font-size: 14px;
   font-weight: 400;
-  color: rgba(240,237,223,0.7);
+  color: rgba(240,235,210,0.75);
   line-height: 1.8;
   font-style: normal;
   letter-spacing: 0.03em;
 }
-
 .blog-bullets {
   list-style: none;
-  padding: 0;
-  margin: 4px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+  padding: 0; margin: 4px 0;
+  display: flex; flex-direction: column; gap: 7px;
 }
 .blog-bullets li {
   font-family: var(--font-zh);
-  font-size: 13px;
+  font-size: 13.5px;
   font-weight: 300;
-  color: var(--text-3);
-  padding-left: 14px;
+  color: var(--text-2);
+  padding-left: 16px;
   position: relative;
   line-height: 1.7;
   letter-spacing: 0.03em;
 }
 .blog-bullets li::before {
   content: '—';
-  position: absolute;
-  left: 0;
-  color: var(--accent);
-  opacity: 0.5;
-  font-family: var(--font-mono);
-  font-size: 11px;
+  position: absolute; left: 0;
+  color: var(--accent); opacity: 0.5;
+  font-family: var(--font-mono); font-size: 11px;
 }
 
-/* KaTeX 数学公式块 */
+/* KaTeX 数学块 */
 .blog-math-block {
   background: rgba(201,168,76,0.04);
   border: 1px solid rgba(201,168,76,0.1);
   border-radius: 6px;
-  padding: 14px 20px;
+  padding: 16px 22px;
   margin: 6px 0;
   overflow-x: auto;
   text-align: center;
 }
-/* KaTeX 颜色适配深色背景 */
-.blog-math-block .katex { color: rgba(240,237,223,0.75); font-size: 1.05em; }
+.blog-math-block .katex { color: rgba(240,235,210,0.78); font-size: 1.08em; }
 
-/* ── 响应式 ── */
 @media (max-width: 900px) {
   .blog-inner { padding: 0 32px; }
-  .blog-grid { grid-template-columns: 1fr; }
+  .blog-grid  { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
-  .blog-inner { padding: 0 20px; }
-  .blog-section { padding: 96px 0 80px; }
+  .blog-inner    { padding: 0 20px; }
+  .blog-section  { padding: 96px 0 80px; }
   .blog-modal-title { font-size: 20px; }
 }

@@ -8,17 +8,15 @@
   "hero": {
     "badge":       "AVAILABLE FOR INTERNSHIP 2026",
     "heading":     "Portfolio",
-    "subheading":  "Yu Qiuxing · BNU-HKBU UIC",
-    "intro":       "I enjoy making fuzzy things clear — whether it's a market signal, a relationship dynamic, or why a system fails",
+    "subheading":  "BNU-HKBU UIC",
+    "intro":       "I like figuring out what's behind the fuzzy — a signal? a concept? a system's breaking point?",
     "ctaProjects": "View Projects",
     "ctaAbout":    "About Me"
   },
   "about": {
-    "title":   "About",
-    "whoami":  "> whoami",
-    "intro":   "First-year CS student at BNU-HKBU UIC\n\nAiming for Quant Trader / Strategy Research / PM\n\nI enjoy making fuzzy things clear — whether it's a market signal, a relationship dynamic, or why a system fails\n\nCurrently evolving AI Trader from a market watcher into a backtestable, risk-aware system — still iterating",
-    "edu":     "Education & Awards",
-    "skills":  "Skills"
+    "title":  "About",
+    "edu":    "Education & Awards",
+    "skills": "Skills"
   },
   "projects": {
     "title":         "Projects",
@@ -32,13 +30,13 @@
     "screenshotSoon":"SCREENSHOT COMING SOON"
   },
   "blog": {
-    "title":    "Thoughts",
-    "expand":   "Read",
-    "readMore": "Read"
+    "title":   "Thoughts",
+    "expand":  "Read",
+    "readMore":"Read"
   },
   "contact": {
-    "title":    "Say Hi",
-    "subtitle": "Open for internships, collaborations, or casual chats",
-    "copied":   "Copied!"
+    "title":   "Say Hi",
+    "subtitle":"Open for internships, collaborations, or casual chats",
+    "copied":  "Copied!"
   }
 }

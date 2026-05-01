@@ -12,6 +12,7 @@ export default function Starfield() {
     const resize = () => {
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
+      // 重新分配星星位置
       initStars();
     };
 
@@ -19,6 +20,7 @@ export default function Starfield() {
     let shootingStars = [];
 
     const initStars = () => {
+      // 暖金白星 220颗
       stars = Array.from({ length: 220 }, () => ({
         x:     Math.random() * canvas.width,
         y:     Math.random() * canvas.height,
@@ -26,13 +28,14 @@ export default function Starfield() {
         alpha: Math.random() * 0.55 + 0.08,
         speed: Math.random() * 0.35 + 0.06,
         phase: Math.random() * Math.PI * 2,
-        warm:  Math.random() > 0.25,
+        warm:  Math.random() > 0.25,   // 75% 暖金，25% 冷蓝白
       }));
     };
 
     initStars();
     window.addEventListener('resize', resize);
 
+    // 流星生成
     const spawnShootingStar = () => {
       shootingStars.push({
         x:      Math.random() * canvas.width * 0.8,
@@ -46,6 +49,7 @@ export default function Starfield() {
       });
     };
 
+    // 每 4-8 秒随机流星
     let shootTimer = setTimeout(function spawn() {
       spawnShootingStar();
       shootTimer = setTimeout(spawn, 4000 + Math.random() * 4000);
@@ -56,6 +60,7 @@ export default function Starfield() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       t += 0.007;
 
+      // 画星星
       stars.forEach(s => {
         const a = s.alpha * (0.5 + 0.5 * Math.sin(t * s.speed + s.phase));
         ctx.beginPath();
@@ -66,11 +71,13 @@ export default function Starfield() {
         ctx.fill();
       });
 
+      // 画流星
       shootingStars = shootingStars.filter(ss => ss.life < ss.maxLife);
       shootingStars.forEach(ss => {
         ss.life++;
         ss.x += Math.cos(ss.angle) * ss.speed;
         ss.y += Math.sin(ss.angle) * ss.speed;
+        // fade in then out
         ss.alpha = ss.life < ss.maxLife * 0.3
           ? ss.life / (ss.maxLife * 0.3)
           : 1 - (ss.life - ss.maxLife * 0.3) / (ss.maxLife * 0.7);
@@ -93,6 +100,7 @@ export default function Starfield() {
         ctx.lineWidth = 1.2;
         ctx.stroke();
 
+        // 流星头部亮点
         ctx.beginPath();
         ctx.arc(ss.x, ss.y, 1.5, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(240,215,150,${ss.alpha})`;
@@ -110,6 +118,7 @@ export default function Starfield() {
     };
   }, []);
 
+  // 鼠标光晕跟随 — 金色
   useEffect(() => {
     const cursor = cursorRef.current;
     const move = (e) => {
@@ -122,11 +131,13 @@ export default function Starfield() {
 
   return (
     <>
+      {/* 星空 canvas */}
       <canvas
         ref={canvasRef}
         style={{ position:'fixed', inset:0, zIndex:0, pointerEvents:'none' }}
       />
 
+      {/* 鼠标光晕 — 金色 */}
       <div
         ref={cursorRef}
         style={{
@@ -141,6 +152,7 @@ export default function Starfield() {
         }}
       />
 
+      {/* 星云光晕 — 右上金，左下深靛 */}
       <div style={{
         position:'fixed', width:'520px', height:'520px',
         background:'radial-gradient(circle, rgba(201,168,76,0.065) 0%, transparent 65%)',
@@ -160,6 +172,7 @@ export default function Starfield() {
         filter:'blur(40px)', pointerEvents:'none', zIndex:0,
       }}/>
 
+      {/* 交易终端金色网格 */}
       <div style={{
         position:'fixed', inset:0,
         backgroundImage:`
@@ -169,6 +182,7 @@ export default function Starfield() {
         pointerEvents:'none', zIndex:0,
       }}/>
 
+      {/* 浮动数据碎片 */}
       {[
         { text:'MACD_CROSS', top:'17%', left:'56%', delay:'0s' },
         { text:'∇f(x)',      top:'33%', left:'75%', delay:'2s' },
