@@ -6,6 +6,7 @@ export default function ProjectModal({ isOpen, onClose, project }) {
   const { t, i18n } = useTranslation();
   const isZh = i18n.language === 'zh';
 
+  // ESC 关闭
   useEffect(() => {
     const fn = (e) => { if (e.key === 'Escape') onClose(); };
     if (isOpen) window.addEventListener('keydown', fn);
@@ -37,6 +38,7 @@ export default function ProjectModal({ isOpen, onClose, project }) {
           >
             <button style={closeStyle} onClick={onClose}>×</button>
 
+            {/* ── 截图区 ── */}
             {project.image ? (
               <div style={imgWrapStyle}>
                 <img
@@ -48,6 +50,7 @@ export default function ProjectModal({ isOpen, onClose, project }) {
                     e.currentTarget.nextSibling.style.display = 'flex';
                   }}
                 />
+                {/* 加载失败时的占位 */}
                 <div style={{ ...placeholderStyle, display: 'none' }}>
                   {t('projects.screenshotSoon')}
                 </div>
@@ -56,6 +59,7 @@ export default function ProjectModal({ isOpen, onClose, project }) {
               <div style={placeholderStyle}>{t('projects.screenshotSoon')}</div>
             )}
 
+            {/* ── 标题 & 状态 ── */}
             <div style={{ display:'flex', alignItems:'flex-start', justifyContent:'space-between', gap:12, marginBottom:22 }}>
               <h2 style={titleStyle}>{title}</h2>
               <span className={project.status === 'active' ? 'status-active' : 'status-done'}
@@ -64,6 +68,7 @@ export default function ProjectModal({ isOpen, onClose, project }) {
               </span>
             </div>
 
+            {/* ── 技术栈 ── */}
             <div style={labelStyle}>{t('projects.techStack')}</div>
             <div className="tech-tags" style={{ marginBottom:24 }}>
               {project.tags.map(tag => (
@@ -71,9 +76,11 @@ export default function ProjectModal({ isOpen, onClose, project }) {
               ))}
             </div>
 
+            {/* ── 背景 ── */}
             <div style={labelStyle}>{isZh ? '背景' : 'Background'}</div>
             <p style={bgStyle}>{detail.background}</p>
 
+            {/* ── 核心亮点 ── */}
             <div style={labelStyle}>{t('projects.highlights')}</div>
             <ul style={{ listStyle:'none', padding:0, margin:'0 0 28px', display:'flex', flexDirection:'column', gap:10 }}>
               {detail.highlights.map((h, i) => (
@@ -81,6 +88,7 @@ export default function ProjectModal({ isOpen, onClose, project }) {
               ))}
             </ul>
 
+            {/* ── GitHub 链接 ── */}
             <a href={project.github} target="_blank" rel="noreferrer" style={githubLinkStyle}>
               {t('projects.github')} ↗
             </a>
@@ -91,6 +99,7 @@ export default function ProjectModal({ isOpen, onClose, project }) {
   );
 }
 
+/* ── 内联样式（避免依赖外部 CSS 文件丢失问题）── */
 const overlayStyle = {
   position:'fixed', inset:0, zIndex:200,
   background:'rgba(2,3,10,0.9)',
@@ -151,6 +160,7 @@ const highlightItemStyle = {
   fontFamily:'var(--font-zh)', fontSize:13.5, fontWeight:300,
   color:'rgba(220,205,170,0.72)', lineHeight:1.75,
   paddingLeft:18, position:'relative', letterSpacing:'0.02em',
+  /* ::before 无法用 inline style，改用 box-shadow 模拟 */
 };
 const githubLinkStyle = {
   display:'inline-flex', alignItems:'center', gap:6,
