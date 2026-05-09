@@ -1,11 +1,16 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8" />
     <title>Portfolio</title>
     <script>
-      const path = window.location.pathname.replace(/^\/+/, '');
-      window.location.replace('/#/' + path + window.location.search + window.location.hash);
+      // GitHub Pages 404 fallback for React Router
+      // When a route like /about is accessed directly, GitHub returns 404
+      // This redirects back to index.html with the path preserved
+      const path = window.location.pathname.replace('/Portfolio/', '');
+      const search = window.location.search;
+      const hash = window.location.hash;
+      window.location.href = '/Portfolio/index.html#' + path + search + hash;
     </script>
   </head>
   <body></body>
