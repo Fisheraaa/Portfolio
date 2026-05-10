@@ -50,17 +50,17 @@ const TIMELINE_EN = [
 
 // 核心技能 — 从简历挑最有代表性的
 const SKILLS_ZH = [
-  { label: '量化 / 建模', items: ['MACD, ARIMA 等技术分析', 'TOPSIS, AHP, 蒙特卡洛', 'Sharpe / Max Drawdown 回测指标'] },
-  { label: '编程', items: ['Python, C, Java, JS', 'HTML, CSS, PHP', 'SQL / Pandas 数据处理'] },
-  { label: '工程', items: ['Docker, WSL2, Git', 'FastAPI, React, Streamlit', 'LLM API, Web3.py'] },
-  { label: 'AI 工作流', items: ['Claude 分析 + Codex 编码', 'Vibe coding 快速原型', 'KNIME 数据科学全流程'] },
+  { label: '量化 / 建模', items: ['MACD, ARIMA 等技术分析', 'TOPSIS, AHP, 蒙特卡洛', '回测基础原理与风控指标'] },
+  { label: '编程', items: ['Python, C, Java, JS', 'HTML, CSS, PHP', 'SQL / MySQL · Pandas 数据处理', 'Linux 命令行 · KNIME 数据科学全流程'] },
+  { label: '工程 / 通识', items: ['Docker, WSL2, Git, LaTeX, Notion', 'Web3 基础', '熟悉行研流程（研究过PC端游产业）'] },
+  { label: 'AI 工作流', items: ['Claude 分析 + Codex 编码', 'Vibe coding 快速原型', 'FastAPI, React, Streamlit, LLM API'] },
 ];
 
 const SKILLS_EN = [
-  { label: 'Quant / Modeling', items: ['MACD, ARIMA, technical analysis', 'TOPSIS, AHP, Monte Carlo', 'Sharpe, Max Drawdown backtesting'] },
-  { label: 'Programming', items: ['Python, C, Java, JS', 'HTML, CSS, PHP', 'SQL / Pandas data processing'] },
-  { label: 'Engineering', items: ['Docker, WSL2, Git', 'FastAPI, React, Streamlit', 'LLM API, Web3.py'] },
-  { label: 'AI Workflow', items: ['Claude analysis + Codex coding', 'Vibe coding rapid prototyping', 'KNIME full data science pipeline'] },
+  { label: 'Quant / Modeling', items: ['MACD, ARIMA, technical analysis', 'TOPSIS, AHP, Monte Carlo', 'Backtesting principles & risk metrics'] },
+  { label: 'Programming', items: ['Python, C, Java, JS', 'HTML, CSS, PHP', 'SQL / MySQL · Pandas data processing', 'Linux CLI · KNIME data science pipeline'] },
+  { label: 'Engineering / General', items: ['Docker, WSL2, Git, LaTeX, Notion', 'Web3 fundamentals', 'Industry research experience (PC gaming sector)'] },
+  { label: 'AI Workflow', items: ['Claude analysis + Codex coding', 'Vibe coding rapid prototyping', 'FastAPI, React, Streamlit, LLM API'] },
 ];
 
 export default function About() {
