@@ -38,6 +38,7 @@ const TIMELINE_EN = [
   },
 ];
 
+// 核心技能 — 从简历挑最有代表性的
 const SKILLS_ZH = [
   { label: '量化 / 建模', items: ['MACD, ARIMA 等技术分析', 'TOPSIS, AHP, 蒙特卡洛', 'Sharpe / Max Drawdown 回测指标'] },
   { label: '编程', items: ['Python, C, Java, JS', 'HTML, CSS, PHP', 'SQL / Pandas 数据处理'] },
