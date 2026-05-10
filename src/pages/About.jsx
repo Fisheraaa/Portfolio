@@ -9,6 +9,11 @@ const TIMELINE_ZH = [
     sub: '计算机科学与技术 · CGPA 3.83 / 4.0（数学及CS专业课满绩）',
   },
   {
+    date: '2026.02',
+    title: 'MCM 美国大学生数学建模竞赛',
+    sub: 'Meritorious（一等奖）',
+  },
+  {
     date: '2025.11',
     title: 'BNBU 程序设计大赛',
     sub: '银奖',
@@ -27,6 +32,11 @@ const TIMELINE_EN = [
     sub: 'Computer Science & Technology · CGPA 3.83 / 4.0 (full marks in Math & CS core courses)',
   },
   {
+    date: '2026.02',
+    title: 'MCM Mathematical Contest in Modeling',
+    sub: 'Meritorious (Top ~7%)',
+  },
+  {
     date: '2025.11',
     title: 'BNBU Programming Contest',
     sub: 'Silver Award',
@@ -38,6 +48,7 @@ const TIMELINE_EN = [
   },
 ];
 
+// 核心技能 — 从简历挑最有代表性的
 const SKILLS_ZH = [
   { label: '量化 / 建模', items: ['MACD, ARIMA 等技术分析', 'TOPSIS, AHP, 蒙特卡洛', 'Sharpe / Max Drawdown 回测指标'] },
   { label: '编程', items: ['Python, C, Java, JS', 'HTML, CSS, PHP', 'SQL / Pandas 数据处理'] },
@@ -65,7 +76,7 @@ export default function About() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="page-inner">
+      <div className="about-inner">
 
         {/* 页面标题 */}
         <h1 className="section-title">

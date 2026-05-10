@@ -1,4 +1,3 @@
-// 用 import 引入图片，让 Vite 处理路径，无论 base 怎么配都不会出错
 import imgTrader   from '../assets/images/AI_Trader_demo.jpg';
 import imgETH      from '../assets/images/ETHanormaly_demo.png';
 import imgPersona  from '../assets/images/Persona_demo1.png';
@@ -6,12 +5,14 @@ import imgPersona  from '../assets/images/Persona_demo1.png';
 export const projects = [
   {
     id: '01',
+    date: '2026.05',
     status: 'active',
-    titleZh: 'SystematicAlpha',
-    titleEn: 'SystematicAlpha',
+    titleZh: '系统化阿尔法研究框架',
+    titleEn: 'Systematic Alpha Research Framework',
     tags: ['Python', 'Tushare Pro', 'Pandas', 'SciPy', 'Plotly'],
     github: 'https://github.com/Fisheraaa/SystematicAlpha',
     image: null,
+    reportUrl: 'https://fisheraaa.github.io/SystematicAlpha/report.html',
     shortDescZh: '针对A股（沪深300/中证500）的偏差控制量化研究框架：点位成分股消除幸存者偏差、6因子库含前视检测、15窗口Walk-Forward验证',
     shortDescEn: 'Bias-controlled quant research framework on A-shares (CSI 300/500): point-in-time universe, 6-factor library with look-ahead detection, 15-window walk-forward validation',
     detailZh: {
@@ -39,12 +40,14 @@ export const projects = [
   },
   {
     id: '02',
+    date: '2026.04',
     status: 'done',
     titleZh: 'AI 量化交易系统',
     titleEn: 'AI Quant Trading System',
     tags: ['Python', 'Docker', 'WSL2', 'LLM API', 'AkShare', '飞书API'],
     github: 'https://github.com/Fisheraaa/ETHanomaly',
     image: imgTrader,
+    reportUrl: null,
     shortDescZh: '事件驱动信号流水线，MACD 多因子体系，LLM 辩论框架过滤信号，飞书实时推送',
     shortDescEn: 'Event-driven signal pipeline with MACD multi-factor system, LLM debate-style filtering, and Feishu real-time push',
     detailZh: {
@@ -58,9 +61,9 @@ export const projects = [
       status: '已完成',
     },
     detailEn: {
-      background: "Starting point: I didn't want to just watch signal alerts, I wanted to know whether a trading judgment actually holds up historically The goal is to evolve an information tool into a full trading system with backtesting and risk control",
+      background: "Starting point: I didn't want to just watch signal alerts, I wanted to know whether a trading judgment actually holds up historically. The goal is to evolve an information tool into a full trading system with backtesting and risk control",
       highlights: [
-        'Designed an event-driven signal pipeline: data ingestion → feature engineering → multi-factor signal generation → decision push Each module is decoupled and hot-swappable',
+        'Designed an event-driven signal pipeline: data ingestion → feature engineering → multi-factor signal generation → decision push. Each module is decoupled and hot-swappable',
         'Built a multi-dimensional factor system (MACD, moving averages), integrated an LLM multi-role debate framework for secondary signal filtering to suppress low-quality noise',
         'Set up containerized infrastructure with Docker + WSL2, separating data / analysis / execution layers, leaving a clean interface for future automated order execution',
         'Feishu push live — receiving real-time trading signal notifications',
@@ -70,12 +73,14 @@ export const projects = [
   },
   {
     id: '03',
+    date: '2026.02',
     status: 'done',
     titleZh: 'ETH 链上异常检测',
     titleEn: 'ETH On-Chain Anomaly Detector',
     tags: ['Python', 'Web3.py', 'Pandas', 'Streamlit', 'Plotly', 'Infura API'],
     github: 'https://github.com/Fisheraaa/ETHanomaly',
     image: imgETH,
+    reportUrl: null,
     shortDescZh: '接入以太坊测试网，用 IQR 统计方法自动标注可疑转账，Streamlit 交互式可视化看板',
     shortDescEn: 'Connected to Ethereum testnet, IQR-based statistical anomaly detection, interactive Streamlit dashboard',
     detailZh: {
@@ -89,24 +94,26 @@ export const projects = [
       status: '已完成',
     },
     detailEn: {
-      background: 'An exploration of on-chain data analysis — using statistical methods rather than hardcoded rule sets to surface anomalous transaction behavior Covers the full pipeline: data ingestion, feature engineering, anomaly labeling, and visualization',
+      background: 'An exploration of on-chain data analysis — using statistical methods rather than hardcoded rule sets to surface anomalous transaction behavior. Covers the full pipeline: data ingestion, feature engineering, anomaly labeling, and visualization',
       highlights: [
         'Connected to Ethereum Sepolia testnet via Infura API, with real-time transaction data ingestion and persistence',
         'Designed an IQR + percentile-threshold statistical detection algorithm to automatically flag high-value / high-frequency suspicious transfers',
         'Built an interactive dashboard with Streamlit + Plotly, supporting anomaly filtering, time slicing, and address tracking',
-        'Fully statistics-driven — no hardcoded rule sets Architecture is portable to mainnet or other chains',
+        'Fully statistics-driven — no hardcoded rule sets. Architecture is portable to mainnet or other chains',
       ],
       status: 'Completed',
     },
   },
   {
     id: '04',
+    date: '2026.02',
     status: 'done',
     titleZh: 'PersonaSphere 人脉管理器',
     titleEn: 'PersonaSphere',
     tags: ['FastAPI', 'React', 'TypeScript', 'Cytoscape.js', 'LLM API'],
     github: 'https://github.com/Fisheraaa/PersonaSphere',
     image: imgPersona,
+    reportUrl: null,
     shortDescZh: '自然语言输入，LLM 抽取结构化人物档案，力导向关系网络图与圈子泡泡图可视化',
     shortDescEn: 'Natural language input, LLM-powered profile extraction, force-directed relationship graph and bubble chart',
     detailZh: {
@@ -120,12 +127,12 @@ export const projects = [
       status: '已完成（本地 Web 版）',
     },
     detailEn: {
-      background: "Built to solve the problem of keeping track of everyone and their relationships in your head The core idea: don't make users fill out forms — let them describe people in natural language and have the model do the structured extraction",
+      background: "Built to solve the problem of keeping track of everyone and their relationships in your head. The core idea: don't make users fill out forms — let them describe people in natural language and have the model do the structured extraction",
       highlights: [
         'Natural language input → LLM extraction → structured person profiles, event nodes, and resource vectors',
         'Intelligent conflict detection and user confirmation flow, with custom priority rules to ensure data consistency and prevent duplicate entries',
         'Force-directed relationship network graph and bubble chart for social circles — turning abstract relationships into interactive graph structures',
-        'Full-stack: FastAPI backend + React + TypeScript frontend Locally deployable',
+        'Full-stack: FastAPI backend + React + TypeScript frontend. Locally deployable',
       ],
       status: 'Completed (local web version)',
     },
