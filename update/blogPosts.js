@@ -100,11 +100,11 @@ export const blogPosts = [
     titleZh: '线性变化 — 零空间 — 奇异性',
     titleEn: 'Linear Maps — Null Space — Singularity',
     summaryZh: '矩阵不是在"作用"，而是在"选择性失明"。零空间不是被消掉的东西，而是等价类的生成器',
-    summaryEn: "A matrix doesn't \"act\" — it selectively ignores. The null space isn't what gets erased — it's the generator of equivalence classes",
+    summaryEn: 'A matrix doesn\'t "act" — it selectively ignores. The null space isn\'t what gets erased — it\'s the generator of equivalence classes',
     sections: [
       {
         titleZh: '1.1 线性变换不是"作用"，而是"选择性失明"',
-        titleEn: "1.1 Linear maps don't \"act\" — they selectively ignore",
+        titleEn: '1.1 Linear maps don\'t "act" — they selectively ignore',
         contentZh: [
           { type: 'text',  text: '矩阵 A 只保留它能看到的方向，其余全部压成 0' },
           { type: 'text',  text: '因此 AB = A 的本质不是"B 被约束"，而是：只要 B 的改动落在 A 看不见的方向上，就等价于没发生' },
@@ -112,13 +112,13 @@ export const blogPosts = [
         ],
         contentEn: [
           { type: 'text',  text: 'Matrix A only preserves the directions it can "see" — everything else collapses to 0' },
-          { type: 'text',  text: "So AB = A doesn't mean \"B is constrained\" — it means: as long as B's change lies in a direction A cannot see, nothing happened" },
+          { type: 'text',  text: 'So AB = A doesn\'t mean "B is constrained" — it means: as long as B\'s change lies in a direction A cannot see, nothing happened' },
           { type: 'quote', text: 'Analogy: a camera that only sees black and white — colors can change all they want' },
         ],
       },
       {
         titleZh: '1.2 零空间不是"被消掉的东西"，而是"等价类的生成器"',
-        titleEn: "1.2 The null space isn't what gets erased — it generates equivalence classes",
+        titleEn: '1.2 The null space isn\'t what gets erased — it generates equivalence classes',
         contentZh: [
           { type: 'math',  text: 'x \\sim x + z,\\quad z \\in \\operatorname{Null}(A)' },
           { type: 'text',  text: '这意味着：A 定义的不是一个映射，而是一种"等价关系"' },
@@ -128,10 +128,10 @@ export const blogPosts = [
         ],
         contentEn: [
           { type: 'math',  text: 'x \\sim x + z,\\quad z \\in \\operatorname{Null}(A)' },
-          { type: 'text',  text: "This means: A doesn't define a mapping — it defines an equivalence relation" },
+          { type: 'text',  text: 'This means: A doesn\'t define a mapping — it defines an equivalence relation' },
           { type: 'text',  text: 'All inputs that differ by a null space vector look identical to A' },
           { type: 'quote', text: 'The problem shifts from "solve an equation" to: pick a representative from an equivalence class' },
-          { type: 'text',  text: "That's the fundamental difficulty in all modeling / reconstruction / generation" },
+          { type: 'text',  text: 'That\'s the fundamental difficulty in all modeling / reconstruction / generation' },
         ],
       },
       {
@@ -149,7 +149,7 @@ export const blogPosts = [
           { type: 'text',  text: 'The general solution of an underdetermined system is fixed:' },
           { type: 'math',  text: 'x = x_0 + z,\\quad z \\in \\operatorname{Null}(A)' },
           { type: 'text',  text: 'The constraint only pins down x₀ — the real choice happens in z' },
-          { type: 'text',  text: "Think of it like Lagrange multipliers:" },
+          { type: 'text',  text: 'Think of it like Lagrange multipliers:' },
           { type: 'math',  text: '\\nabla f(x) + \\sum_i \\lambda_i \\nabla g_i(x) = 0' },
           { type: 'math',  text: 'g_i(x) = 0' },
         ],
@@ -212,7 +212,7 @@ export const blogPosts = [
         contentEn: [
           { type: 'quote', text: "Any two random vectors in high dimensions are almost orthogonal" },
           { type: 'text',  text: 'The system naturally has a huge number of "non-interfering storage channels"' },
-          { type: 'text',  text: "LLM capability doesn't come from \"remembering more\" — it comes from placing different semantics into directions that barely interfere with each other" },
+          { type: 'text',  text: 'LLM capability doesn\'t come from "remembering more" — it comes from placing different semantics into directions that barely interfere with each other' },
         ],
       },
       {
@@ -230,7 +230,7 @@ export const blogPosts = [
           { type: 'text',    text: 'These constraints come from:' },
           { type: 'bullets', items: ['Grammar structure', 'Context', 'Attention'] },
           { type: 'text',    text: 'So "logical coherence" means: never leaving that manifold' },
-          { type: 'text',    text: "But that doesn't mean it \"understands truth\"" },
+          { type: 'text',    text: 'But that doesn\'t mean it "understands truth"' },
         ],
       },
       {
