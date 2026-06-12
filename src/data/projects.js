@@ -4,6 +4,43 @@ import imgPersona  from '../assets/images/Persona_demo1.png';
 
 export const projects = [
   {
+    id: '00',
+    date: '2026.06',
+    status: 'active',
+    titleZh: '个股日内阿尔法研究（688981）',
+    titleEn: 'Intraday Alpha Research (688981)',
+    tags: ['Python', 'PyTorch', 'VeighNa', 'Optuna', 'Baostock'],
+    github: 'https://github.com/Fisheraaa/DayAlpha_688981',
+    image: null,
+    reportUrl: null,
+    shortDescZh: '四模型集成（Transformer-LSTM / VanillaLSTM / CNN-LSTM / MLP）对中芯国际30分钟K线做日内方向预测；Walk-Forward验证，接入VeighNa平台与通达信实时行情',
+    shortDescEn: 'Four-model ensemble (Transformer-LSTM / VanillaLSTM / CNN-LSTM / MLP) for intraday direction prediction on 688981 30-min bars; Walk-Forward validation, VeighNa integration and TDX live feed',
+    detailZh: {
+      background: '科创板T+0制度允许当日买入后卖出，为日内机器学习策略提供了可能性。这个项目从5分钟K线出发，历经9个版本的失败迭代（AUC天花板0.54~0.57，Walk-Forward夏普均值-6.87），发现根本瓶颈是5分钟K线信噪比过低后，换用30分钟周期实现突破——时间止损占比从94%降至50%，说明价格在持仓期间真正产生了方向性运动。核心目标不是拟合历史，而是诚实回答：在扣除所有真实成本后，这个策略在样本外数据上是否具有正期望？',
+      highlights: [
+        '28维IC筛选特征（Spearman |IC|≥0.008），覆盖动量趋势、超买超卖、量价配合、微观结构、日内时间效应8类金融假设；所有特征均做.shift(1)防前视偏差',
+        '四模型集成（Transformer-LSTM / VanillaLSTM+注意力 / CNN-SE-LSTM / MLP+残差），Softmax温度缩放权重，Optuna TPE超参搜索（30 trials），RTX 5060 GPU + AMP混合精度训练',
+        '标签设计：future_max_high（窗口内最高价涨幅>阈值）而非固定时点涨幅，与追踪止损出场逻辑完全对应，消除标签与策略盈利条件的错位',
+        '三层止损体系（固定止损1.2% / 追踪止损：盈利≥1%激活，回落0.6%触发 / 90分钟时间止损）；精确成本模型（万2.5佣金+印花税+经手费+2bp滑点，往返≈20bp）',
+        '11窗口Walk-Forward验证（8个月训练/1个月测试）；OOS 2024全年：+4.94%收益，Sharpe 0.804，最大回撤6.37%，胜率42.4%，盈亏比1.62，Kelly期望值+0.111（正期望）',
+        '接入VeighNa开源量化平台与通达信公共行情服务器，实现从历史回测到实时信号的完整闭环；主动识别局限：OOS 250笔，t检验p≈0.22；下一步方向为Level-2数据与多标的截面化',
+      ],
+      status: '实时信号运行中',
+    },
+    detailEn: {
+      background: "The STAR Market's T+0 rule — buy and sell on the same day — creates a viable environment for intraday ML strategies. This project started with 5-min bars and went through 9 failed iterations (AUC ceiling 0.54–0.57, Walk-Forward Sharpe mean −6.87). After identifying the root cause as poor signal-to-noise ratio at 5-min frequency, switching to 30-min bars broke through the ceiling — time-stop proportion dropped from 94% to 50%, indicating prices now move directionally during the holding period. The core goal: does this strategy have positive expected value on unseen data, after all realistic costs?",
+      highlights: [
+        '28 IC-filtered features (Spearman |IC|≥0.008) spanning 8 hypothesis classes: momentum, trend strength, overbought/oversold, volume-price, microstructure, intraday time effects; all features shift(1)-lagged to prevent look-ahead bias',
+        'Four-model ensemble (Transformer-LSTM / VanillaLSTM+Attention / CNN-SE-LSTM / MLP+Residual), Softmax temperature-scaled weights, Optuna TPE hyperparameter search (30 trials), RTX 5060 GPU + AMP mixed-precision training',
+        'Label design: future_max_high (max price appreciation within prediction window exceeds threshold) rather than fixed-horizon return — perfectly aligned with trailing-stop exit logic, eliminating the mismatch between label and profit condition',
+        'Three-layer risk control (fixed stop-loss 1.2% / trailing stop: activates at +1% profit, triggers at −0.6% from peak / 90-min time stop); precise cost model (0.025% commission + stamp duty + exchange fee + 2bp slippage, round-trip ≈ 20bp)',
+        '11-window Walk-Forward validation (8-month train / 1-month test); OOS full-year 2024: +4.94% return, Sharpe 0.804, max drawdown 6.37%, win rate 42.4%, payoff ratio 1.62, Kelly EV +0.111 (positive expected value)',
+        'Full pipeline from historical backtest to live signal via VeighNa platform and TDX public quote server; honest limitations: 250 OOS trades, t-test p≈0.22; next steps: Level-2 data and multi-asset cross-sectional extension',
+      ],
+      status: 'Live signal running',
+    },
+  },
+  {
     id: '01',
     date: '2026.05',
     status: 'active',
