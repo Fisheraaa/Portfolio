@@ -4,7 +4,6 @@ import { HashRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import App from './App';
 import './i18n';
-import './styles/fonts.css';
 import './styles/globals.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
