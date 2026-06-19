@@ -113,7 +113,7 @@ function MediaBlock({ src, reportUrl, alt, placeholder, isZh }) {
         style={S.reportLink}
       >
         <span style={S.reportIcon}>↗</span>
-        <span>{isZh ? '查看完整项目报告' : 'View Full Project Report'}</span>
+        <span>{isZh ? '查看完整报告' : 'View Full Report'}</span>
       </a>
     );
   }
