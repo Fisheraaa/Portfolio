@@ -3,8 +3,49 @@ import imgETH      from '../assets/images/ETHanormaly_demo.png';
 import imgPersona  from '../assets/images/Persona_demo1.png';
 
 export const projects = [
+  // ── NEW ──────────────────────────────────────────────────────────────────
   {
     id: '00',
+    date: '2026.07',
+    status: 'done',
+    titleZh: '跨市场特质收益反转研究',
+    titleEn: 'Cross-Market Idiosyncratic Reversion',
+    tags: ['Python', 'XGBoost', 'Binance API', 'statsmodels', 'Pandas', 'Kalman/RLS'],
+    github: 'https://github.com/Fisheraaa/cross_mkt_idio_reversion',
+    image: null,
+    reportUrl: null,
+    shortDescZh:
+      '基于 Binance 永续合约的小时频跨市场特质收益反转研究。动态 RLS/Kalman 因子 beta 剥离，XGBoost 月扩展训练，完整成本链（价差/手续费/滑点/资金费/资金占用），fail-closed 三段验证协议。最终结论：VALIDATION_FAIL。',
+    shortDescEn:
+      'Hourly cross-market idiosyncratic reversion research on Binance perpetual futures. Dynamic RLS/Kalman factor beta stripping, monthly expanding XGBoost, full cost chain (spread/fee/slippage/funding/capital), fail-closed train/val/test protocol. Final verdict: VALIDATION_FAIL.',
+    detailZh: {
+      background:
+        '假设：对 13 个加密资产，用预声明因子腿（BTC、ETH、SOL、QQQ、SPY、SOXL）动态对冲后，小时级特质收益冲击应在 2–24 小时内均值回归。核心工程约束：信号生成不使用当期数据，显式建模 60 分钟执行时延，验证协议 fail-closed——前后两段均满足要求才允许查看测试集。',
+      highlights: [
+        '完整研究管道：Binance 公共 API 采集 30 分钟 bar → 重建小时信号 → 动态 RLS beta 估计（半衰期 720 小时）→ XGBoost 月扩展训练 → 成本门槛准入 → 逐笔回测（含资金费、净额化成本、组合约束）',
+        '验证集全期净收益 +$89,376，成本覆盖 2.4x；前后半段拆分后，后半段净亏损 -$10,715（1x 成本）/ -$26,586（2x 成本），触发 fail-closed，测试集未解锁',
+        '根因诊断：13/13 小时残差通过 ADF，但累计价差仅 validation 5/13 平稳，AR(1) 中位数约 0.998；未筛选核心毛收益约 19.4 bps，净额成本约 28.6 bps，净边际为负；尾部延续（最差 1% 合计 -24,718 bps）压低均值',
+        'TreeSHAP Top-5 特征两期高度稳定，但排列重要性剧烈变化（boll_width/mfi14 从无关紧要跃升为 Top-2）——清晰说明模型关注 ≠ 信号有效性，XGBoost 捕捉了一个真实但不稳定的市场状态',
+        '29 项自动化测试全部通过；固定 XGBoost 3.3.0 环境独立重复两次，数值完全一致。正确结论是继续研究，而不是上线资金',
+      ],
+      status: '已完成（验证失败，测试集锁定）',
+    },
+    detailEn: {
+      background:
+        "Hypothesis: for 13 crypto assets, hourly idiosyncratic return shocks — after dynamically stripping pre-declared factor legs (BTC/ETH/SOL/QQQ/SPY/SOXL) — should mean-revert within 2–24 hours. Core engineering constraints: no lookahead in signal generation, explicit 60-minute execution delay, and a fail-closed validation protocol requiring both sub-periods to pass before the test set is unlocked.",
+      highlights: [
+        'Full research pipeline: Binance public API → 30-min bar reconstruction → hourly signal → dynamic RLS beta (720-hour half-life) → monthly expanding XGBoost → cost-threshold admission → per-trade backtest (funding, netted costs, portfolio constraints)',
+        'Full validation net PnL +$89,376, cost coverage 2.4x — but second-half sub-period posts net loss of -$10,715 (1x costs) / -$26,586 (2x costs); fail-closed triggered, test set remains locked',
+        'Root cause: 13/13 hourly residuals pass ADF, but cumulative spread only 5/13 pass in validation; AR(1) median ≈ 0.998; unfiltered core gross edge ~19.4 bps vs net cost ~28.6 bps; tail continuation (worst 1% sums to -24,718 bps) destroys the mean',
+        'TreeSHAP Top-5 is stable across both periods, but permutation importance reverses (boll_width/mfi14 go from irrelevant to Top-2) — cleanly separating model attention from signal validity',
+        '29 automated tests pass; reproducible in two independent runs under fixed XGBoost 3.3.0. Correct conclusion: continue research, do not deploy capital',
+      ],
+      status: 'Completed — validation failed, test set locked',
+    },
+  },
+  // ── (was id:'00') ────────────────────────────────────────────────────────
+  {
+    id: '01',
     date: '2026.06',
     status: 'done',
     titleZh: '个股日内阿尔法研究（688981）',
@@ -16,7 +57,7 @@ export const projects = [
     shortDescZh: '四模型集成（Transformer-LSTM / VanillaLSTM / CNN-LSTM / MLP）对中芯国际30分钟K线做日内方向预测；Walk-Forward验证，接入VeighNa平台与通达信实时行情',
     shortDescEn: 'Four-model ensemble (Transformer-LSTM / VanillaLSTM / CNN-LSTM / MLP) for intraday direction prediction on 688981 30-min bars; Walk-Forward validation, VeighNa integration and TDX live feed',
     detailZh: {
-      background: '科创板T+0机制为日内ML策略提供了空间。针对688981，30分钟K线，四模型集成（Transformer-LSTM / LSTM / CNN-LSTM / MLP）预测方向概率，叠加动态仓位（20%~40%）与三层止损（固定/追踪/3根K线时间止损）。Pipeline覆盖数据获取、IC特征筛选（31→28特征）、PurgedKFold Walk-Forward、三种可解释性分析（SHAP/集成梯度/排列重要性）、双引擎回测（自研+VeighNa）及通达信实时行情接入。核心问题不是"策略跑出了多少收益"，而是：这个结果经得起方法论的审视吗？',
+      background: '科创板T+0机制为日内ML策略提供了空间。针对688981，30分钟K线，四模型集成（Transformer-LSTM / LSTM / CNN-LSTM / MLP）预测方向概率，叠加动态仓位（20%~40%）与三层止损（固定/追踪/3根K线时间止损）。Pipeline覆盖数据获取、IC特征筛选（31→28特征）、PurgedKFold Walk-Forward、三种可解释性分析（SHAP/集成梯度/排列重要性）、双引擎回测（自研+VeighNa）及通达信实时行情接入。核心问题不是「策略跑出了多少收益」，而是：这个结果经得起方法论的审视吗？',
       highlights: [
         '训练期2024 OOS：+4.94%，Sharpe 0.804，胜率42.4%，盈亏比1.62，250笔，Kelly期望+0.111；VeighNa独立引擎+4.45%/0.477方向一致；逐笔t检验t=2.49，p=0.013统计显著',
         '对2024 OOS结果的质疑：约16轮"观察→调参"迭代后选出此结果，即使权重从未在2024数据训练，"选择汇报这个版本"的决策构成López de Prado所说的backtest overfitting via repeated trials；WF均值Sharpe -2.42与单点+0.804差距悬殊是直接证据',
@@ -33,15 +74,16 @@ export const projects = [
         'Training-period 2024 OOS: +4.94%, Sharpe 0.804, 42.4% win rate, 1.62 payoff ratio, 250 trades, Kelly EV +0.111; VeighNa independent engine +4.45%/0.477, directionally consistent; per-trade t-test t=2.49, p=0.013 significant',
         'Methodological concern: roughly 16 rounds of observe-and-adjust on 2024 OOS before selecting this result; even though model weights were never trained on 2024 data, the decision to report this specific version constitutes what López de Prado calls backtest overfitting via repeated trials — the gap between WF mean Sharpe −2.42 and the single-point +0.804 is direct evidence',
         'Independent OOS (2025-01–2026-06, zero config changes): total return −19.21%, Sharpe −3.332, 32.1% win rate; per-bar annualised Sharpe t-test: t=−3.88, p=0.0001, statistically highly significant negative — three observations side by side: WF −2.42 / 2024 +0.804 (selected) / 2025-26 −3.332, two negative one positive',
-        'Root cause — intraday time-of-day alpha decay: ablation removing time_cos/time_sin worsens 2024 WF across all metrics (Sharpe −2.42→−3.54, win rate 37.9%→33.2%), proving these features were genuinely useful in the training period, not spuriously correlated; but permutation importance shows time_sin dropped from rank #1 in 2024 to rank #27 in 2025-26, with time_cos ranking last in both periods — 688981\'s intraday time regularity has decayed and reversed after 2024',
+        "Root cause — intraday time-of-day alpha decay: ablation removing time_cos/time_sin worsens 2024 WF across all metrics (Sharpe −2.42→−3.54, win rate 37.9%→33.2%), proving these features were genuinely useful in the training period, not spuriously correlated; but permutation importance shows time_sin dropped from rank #1 in 2024 to rank #27 in 2025-26, with time_cos ranking last in both periods — 688981's intraday time regularity has decayed and reversed after 2024",
         'SHAP is highly stable across both periods (identical Top-5, time_cos+time_sin combined 22.1%→22.2%); permutation importance shifts dramatically (boll_width/mfi14 go from irrelevant in 2024 to top-2 features in 2025-26) — cleanly distinguishing model attention from signal validity; the two are not equivalent',
         '+0.804 is real alpha within the training distribution; −3.332 is the same alpha failing out-of-sample; monthly breakdown shows −19.21% composed of steady −1.5% to −2.2% losses per month, no single month exceeding −2.81% — a uniform decay pattern, not tail-event collapse. Both numbers together tell a more complete research story than either one alone',
       ],
       status: 'Completed — pipeline archived, awaiting H2 2026 new data',
     },
   },
+  // ── (was id:'01') ────────────────────────────────────────────────────────
   {
-    id: '01',
+    id: '02',
     date: '2026.05',
     status: 'done',
     titleZh: '量化框架初识',
@@ -75,14 +117,15 @@ export const projects = [
       status: 'Completed',
     },
   },
+  // ── (was id:'02', GitHub URL FIXED) ─────────────────────────────────────
   {
-    id: '02',
+    id: '03',
     date: '2026.04',
     status: 'done',
     titleZh: '半自动炒股消息推送系统',
     titleEn: 'Semi-Automated Stock Signal Push System',
     tags: ['Python', 'Docker', 'WSL2', 'LLM API', 'AkShare', '飞书API'],
-    github: 'https://github.com/Fisheraaa/ETHanomaly',
+    github: 'https://github.com/Fisheraaa/AI_Trader',
     image: imgTrader,
     reportUrl: null,
     shortDescZh: '事件驱动信号流水线，MACD 多因子体系，LLM 辩论框架过滤信号，飞书实时推送',
@@ -108,8 +151,9 @@ export const projects = [
       status: 'Completed',
     },
   },
+  // ── (was id:'03') ────────────────────────────────────────────────────────
   {
-    id: '03',
+    id: '04',
     date: '2026.02',
     status: 'done',
     titleZh: 'ETH 链上异常检测',
@@ -141,8 +185,9 @@ export const projects = [
       status: 'Completed',
     },
   },
+  // ── (was id:'04') ────────────────────────────────────────────────────────
   {
-    id: '04',
+    id: '05',
     date: '2026.02',
     status: 'done',
     titleZh: 'PersonaSphere 人脉管理器',

@@ -1,42 +1,54 @@
 {
   "nav": {
-    "about":    "About",
+    "about": "About",
     "projects": "Projects",
-    "blog":     "Thoughts",
-    "contact":  "Contact"
+    "blog": "Thoughts",
+    "contact": "Contact"
   },
   "hero": {
-    "badge":       "AVAILABLE FOR INTERNSHIP 2026",
-    "heading":     "Portfolio",
-    "subheading":  "BNU-HKBU UIC",
-    "intro":       "I like figuring out what's behind the fuzzy — a signal? a concept? a system's breaking point?",
+    "badge": "AVAILABLE FOR INTERNSHIP 2026",
+    "heading": "Hi, I'm",
+    "subheading": "HKBU, Zhuhai Campus",
+    "intro": "I like figuring out what's behind the fuzzy — a signal? a concept? a system's breaking point?",
     "ctaProjects": "View Projects",
-    "ctaAbout":    "About Me"
+    "ctaAbout": "About Me",
+    "name": "Leon Yu.",
+    "locLabel": "Based in Zhuhai",
+    "statusLbl": "Status",
+    "status": "Open to internships",
+    "metaNow": "HKBU (Zhuhai Campus) · Computer Science · Year 1",
+    "metaDir": "Quant Strategy Research · PM · AI",
+    "metaDoing": "Cross-Market Idiosyncratic Reversion · DayAlpha",
+    "lblNow": "Now",
+    "lblDir": "Target",
+    "lblDoing": "Building",
+    "cta1": "View Projects",
+    "cta2": "Say Hi"
   },
   "about": {
-    "title":  "About",
-    "edu":    "Education & Awards",
+    "title": "About",
+    "edu": "Education & Awards",
     "skills": "Skills"
   },
   "projects": {
-    "title":         "Projects",
-    "viewDetail":    "View Details",
-    "github":        "GitHub",
-    "active":        "IN PROGRESS",
-    "done":          "COMPLETED",
-    "techStack":     "Tech Stack",
-    "highlights":    "Highlights",
-    "background":    "Background",
-    "screenshotSoon":"SCREENSHOT COMING SOON"
+    "title": "Projects",
+    "viewDetail": "View Details",
+    "github": "GitHub",
+    "active": "IN PROGRESS",
+    "done": "COMPLETED",
+    "techStack": "Tech Stack",
+    "highlights": "Highlights",
+    "background": "Background",
+    "screenshotSoon": "SCREENSHOT COMING SOON"
   },
   "blog": {
-    "title":   "Thoughts",
-    "expand":  "Read",
-    "readMore":"Read"
+    "title": "Thoughts",
+    "expand": "Read",
+    "readMore": "Read"
   },
   "contact": {
-    "title":   "Say Hi",
-    "subtitle":"Open for internships, collaborations, or casual chats",
-    "copied":  "Copied!"
+    "title": "Say Hi",
+    "subtitle": "Open for internships, collaborations, or casual chats",
+    "copied": "Copied!"
   }
 }

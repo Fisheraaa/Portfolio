@@ -1,42 +1,54 @@
 {
   "nav": {
-    "about":    "关于",
+    "about": "关于",
     "projects": "项目",
-    "blog":     "思考",
-    "contact":  "联系"
+    "blog": "思考",
+    "contact": "联系"
   },
   "hero": {
-    "badge":       "AVAILABLE FOR INTERNSHIP 2026",
-    "heading":     "个人主页",
-    "subheading":  "BNU-HKBU UIC",
-    "intro":       "喜欢弄清模糊背后的东西是什么——一个信号？一个概念？还是一个系统的崩溃边界？",
+    "badge": "AVAILABLE FOR INTERNSHIP 2026",
+    "heading": "你好，我是",
+    "subheading": "香港浸会大学（珠海校区）",
+    "intro": "喜欢弄清模糊背后的东西是什么——一个信号？一个概念？还是一个系统的崩溃边界？",
     "ctaProjects": "查看项目",
-    "ctaAbout":    "关于我"
+    "ctaAbout": "关于我",
+    "name": "Leon Yu。",
+    "locLabel": "坐标 珠海",
+    "statusLbl": "状态",
+    "status": "实习申请中",
+    "metaNow": "香港浸会大学（珠海校区）计算机科学与技术 大一",
+    "metaDir": "Quant Strategy Research · PM · AI",
+    "metaDoing": "跨市场特质收益反转研究 · DayAlpha · quant 全链",
+    "lblNow": "现在",
+    "lblDir": "方向",
+    "lblDoing": "在做",
+    "cta1": "查看项目",
+    "cta2": "打个招呼"
   },
   "about": {
-    "title":  "关于我",
-    "edu":    "教育 & 竞赛",
+    "title": "关于我",
+    "edu": "教育 & 竞赛",
     "skills": "技能"
   },
   "projects": {
-    "title":         "项目",
-    "viewDetail":    "查看详情",
-    "github":        "GitHub",
-    "active":        "进行中",
-    "done":          "已完成",
-    "techStack":     "技术栈",
-    "highlights":    "核心亮点",
-    "background":    "背景",
-    "screenshotSoon":"截图即将上线"
+    "title": "项目",
+    "viewDetail": "查看详情",
+    "github": "GitHub",
+    "active": "进行中",
+    "done": "已完成",
+    "techStack": "技术栈",
+    "highlights": "核心亮点",
+    "background": "背景",
+    "screenshotSoon": "截图即将上线"
   },
   "blog": {
-    "title":   "思考",
-    "expand":  "展开阅读",
-    "readMore":"展开阅读"
+    "title": "思考",
+    "expand": "展开阅读",
+    "readMore": "展开阅读"
   },
   "contact": {
-    "title":   "打个招呼",
-    "subtitle":"找实习 / 合作 / 随便聊都行",
-    "copied":  "已复制！"
+    "title": "打个招呼",
+    "subtitle": "找实习 / 合作 / 随便聊都行",
+    "copied": "已复制！"
   }
 }
