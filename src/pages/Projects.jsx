@@ -25,9 +25,12 @@ export default function Projects() {
             <motion.div
               className="project-card"
               key={proj.id}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08, duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              /* ── 滚动揭示动效 ── */
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ delay: (i % 3) * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              onClick={() => setSelected(proj)}
             >
               <span className="card-corner cc-tl" />
               <span className="card-corner cc-tr" />
@@ -55,20 +58,16 @@ export default function Projects() {
               <div className="card-title">{isZh ? proj.titleZh : proj.titleEn}</div>
 
               <div className="tech-tags">
-                {proj.tags.map(tag => (
-                  <span key={tag} className="tech-tag">{tag}</span>
-                ))}
+                {proj.tags.map(tag => <span key={tag} className="tech-tag">{tag}</span>)}
               </div>
 
               <hr className="card-divider" />
 
-              <p className="card-desc">
-                {isZh ? proj.shortDescZh : proj.shortDescEn}
-              </p>
+              <p className="card-desc">{isZh ? proj.shortDescZh : proj.shortDescEn}</p>
 
               <button
                 className="card-link"
-                style={{ marginTop: 'auto', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                style={{ marginTop:'auto', background:'none', border:'none', cursor:'pointer', padding:0 }}
                 onClick={() => setSelected(proj)}
               >
                 {t('projects.viewDetail')} →
@@ -78,11 +77,7 @@ export default function Projects() {
         </div>
       </div>
 
-      <ProjectModal
-        isOpen={!!selected}
-        project={selected}
-        onClose={() => setSelected(null)}
-      />
+      <ProjectModal isOpen={!!selected} project={selected} onClose={() => setSelected(null)} />
     </motion.section>
   );
 }

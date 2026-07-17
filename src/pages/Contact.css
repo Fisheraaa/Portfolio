@@ -1,122 +1,147 @@
 .contact-section {
   min-height: 100vh;
-  display: flex;
-  align-items: center;
-  padding: 120px 0;
+  padding: 120px 0 120px;
   position: relative;
   z-index: 10;
 }
 
-.contact-subtitle {
-  font-family: var(--font-zh);
-  font-size: 16px;
-  font-weight: 300;
-  color: var(--text-2);
-  margin-bottom: 56px;
-  text-align: center;
-  letter-spacing: 0.03em;
+.page-inner--narrow {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 7vw, 80px);
 }
 
+.contact-subtitle {
+  font-size: clamp(15px, 1.7vw, 17px);
+  color: var(--text-2);
+  line-height: 1.8;
+  margin: 20px 0 56px;
+  letter-spacing: 0.02em;
+}
+
+/* ── 联系方式列表 ── */
 .contact-list {
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  max-width: 520px;
-  margin: 0 auto;
+  gap: 12px;
 }
 
+/* 每一行按钮 */
 .contact-btn {
-  display: flex;
+  display: grid;
+  grid-template-columns: 44px 1fr 36px;
   align-items: center;
-  gap: 18px;
-  padding: 20px 24px;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
+  gap: 0;
+  background: rgba(7, 9, 26, 0.55);
+  border: 1px solid rgba(201,168,76,0.09);
   border-radius: 10px;
-  width: 100%;
-  text-align: left;
+  padding: 18px 20px;
   cursor: pointer;
   text-decoration: none;
-  transition: border-color 0.2s, background 0.2s;
   color: inherit;
-  font-family: inherit;
+  text-align: left;
+  width: 100%;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.2s cubic-bezier(.22,.61,.36,1);
+  position: relative;
+}
+.contact-btn::before {
+  content: '';
+  position: absolute;
+  top: -1px; left: -1px;
+  width: 10px; height: 10px;
+  border-top: 1px solid rgba(201,168,76,0.3);
+  border-left: 1px solid rgba(201,168,76,0.3);
 }
 .contact-btn:hover {
-  border-color: rgba(201,168,76,0.32);
+  border-color: rgba(201,168,76,0.28);
   background: rgba(201,168,76,0.03);
+  transform: translateX(5px);
 }
 
+/* 图标列 */
 .contact-btn-icon {
-  width: 40px; height: 40px;
-  border-radius: 8px;
-  background: rgba(201,168,76,0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--accent);
+  opacity: 0.75;
   flex-shrink: 0;
-  transition: background 0.2s;
 }
-.contact-btn:hover .contact-btn-icon {
-  background: rgba(201,168,76,0.15);
-}
+.contact-btn:hover .contact-btn-icon { opacity: 1; }
 
-.contact-btn-body { flex: 1; }
+/* 文字列 */
+.contact-btn-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
 
 .contact-btn-label {
-  font-family: var(--font-body);
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text-1);
-  margin-bottom: 3px;
-}
-.contact-btn-value {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 10px;
   color: var(--text-3);
-  letter-spacing: 0.04em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
+.contact-btn-value {
+  font-size: 14.5px;
+  color: var(--text-1);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 操作列 */
 .contact-btn-action {
-  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 16px;
   color: var(--text-3);
-  transition: transform 0.2s, color 0.2s;
+  transition: color 0.2s, transform 0.2s;
   flex-shrink: 0;
 }
 .contact-btn:hover .contact-btn-action {
-  transform: translateX(4px);
   color: var(--accent);
+  transform: translateX(3px);
 }
 
 .contact-copied {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10px;
   color: var(--accent);
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
 }
+
 .contact-copy-icon {
   font-size: 16px;
+  line-height: 1;
+  opacity: 0.6;
 }
+.contact-btn:hover .contact-copy-icon { opacity: 1; }
 
+/* 底部 star 提示 */
 .contact-star-hint {
-  text-align: center;
-  font-family: var(--font-zh);
-  font-size: 12.5px;
+  margin-top: 16px;
+  font-family: var(--font-mono);
+  font-size: 11px;
   color: var(--text-3);
-  opacity: 0.55;
-  margin-top: 4px;
-  letter-spacing: 0.02em;
-  line-height: 1.6;
-  transition: opacity 0.2s;
+  letter-spacing: 0.06em;
+  line-height: 1.7;
+  text-align: center;
+  padding: 14px 0 0;
+  border-top: 1px solid rgba(201,168,76,0.07);
 }
-.contact-star-hint:hover { opacity: 0.85; }
 
 @media (max-width: 600px) {
-  .contact-section { padding: 96px 0 80px; align-items: flex-start; }
-  .contact-subtitle { font-size: 14px; margin-bottom: 36px; }
-  .contact-list { max-width: 100%; padding: 0 20px; }
-  .contact-btn { gap: 14px; padding: 16px 18px; }
-  .contact-btn-icon { width: 36px; height: 36px; border-radius: 6px; }
-  .contact-btn-label { font-size: 14px; }
-  .contact-btn-value { font-size: 11px; letter-spacing: 0.02em; }
+  .contact-section { padding: 96px 0 80px; }
+  .contact-btn-value { font-size: 13px; }
+  .contact-btn { padding: 16px 16px; }
 }
