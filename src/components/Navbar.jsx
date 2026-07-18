@@ -80,7 +80,7 @@ export default function Navbar() {
         <a
           id="resume-link"
           className="nav-ic"
-          href="/resume.pdf"
+          href={`${import.meta.env.BASE_URL}resume.pdf`}
           target="_blank"
           rel="noopener"
           aria-label="CV / 简历"
@@ -149,7 +149,7 @@ export default function Navbar() {
               {t(item.key)}
             </Link>
           ))}
-          <a className="mobile-nav-link" href="/resume.pdf" target="_blank" rel="noopener">CV ↗</a>
+          <a className="mobile-nav-link" href={`${import.meta.env.BASE_URL}resume.pdf`} target="_blank" rel="noopener">CV ↗</a>
           <button className="lang-toggle" onClick={toggleLang} style={{ marginTop: 24 }}>
             {i18n.language === 'zh' ? 'EN' : '中'}
           </button>

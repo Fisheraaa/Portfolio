@@ -1,147 +1,86 @@
-.contact-section {
-  min-height: 100vh;
-  padding: 120px 0 120px;
-  position: relative;
-  z-index: 10;
-}
+.contact-section { min-height:100vh; padding:120px 0; position:relative; z-index:10; }
+.page-inner--narrow { max-width:620px; margin:0 auto; padding:0 clamp(24px,7vw,80px); }
 
-.page-inner--narrow {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 0 clamp(24px, 7vw, 80px);
-}
+.contact-subtitle { font-size:clamp(15px,1.7vw,17px); color:var(--text-2); line-height:1.8; margin:20px 0 52px; letter-spacing:0.02em; }
+.contact-list { display:flex; flex-direction:column; gap:11px; }
 
-.contact-subtitle {
-  font-size: clamp(15px, 1.7vw, 17px);
-  color: var(--text-2);
-  line-height: 1.8;
-  margin: 20px 0 56px;
-  letter-spacing: 0.02em;
-}
-
-/* ── 联系方式列表 ── */
-.contact-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-/* 每一行按钮 */
+/* 每行按钮 */
 .contact-btn {
   display: grid;
-  grid-template-columns: 44px 1fr 36px;
+  grid-template-columns: 44px 1fr auto;
   align-items: center;
   gap: 0;
-  background: rgba(7, 9, 26, 0.55);
-  border: 1px solid rgba(201,168,76,0.09);
-  border-radius: 10px;
-  padding: 18px 20px;
-  cursor: pointer;
-  text-decoration: none;
-  color: inherit;
-  text-align: left;
-  width: 100%;
-  transition:
-    border-color 0.2s,
-    background 0.2s,
-    transform 0.2s cubic-bezier(.22,.61,.36,1);
-  position: relative;
+  background: rgba(7,9,26,0.55); border:1px solid rgba(201,168,76,0.09);
+  border-radius:10px; padding:17px 20px;
+  cursor:pointer; text-decoration:none; color:inherit;
+  text-align:left; width:100%;
+  transition: border-color .2s, background .2s, transform .2s cubic-bezier(.22,.61,.36,1);
+  position:relative;
 }
-.contact-btn::before {
-  content: '';
-  position: absolute;
-  top: -1px; left: -1px;
-  width: 10px; height: 10px;
-  border-top: 1px solid rgba(201,168,76,0.3);
-  border-left: 1px solid rgba(201,168,76,0.3);
-}
-.contact-btn:hover {
-  border-color: rgba(201,168,76,0.28);
-  background: rgba(201,168,76,0.03);
-  transform: translateX(5px);
-}
+.contact-btn::before { content:''; position:absolute; top:-1px; left:-1px; width:10px; height:10px; border-top:1px solid rgba(201,168,76,0.3); border-left:1px solid rgba(201,168,76,0.3); }
+.contact-btn:hover { border-color:rgba(201,168,76,0.28); background:rgba(201,168,76,0.03); transform:translateX(5px); }
 
-/* 图标列 */
-.contact-btn-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--accent);
-  opacity: 0.75;
-  flex-shrink: 0;
-}
-.contact-btn:hover .contact-btn-icon { opacity: 1; }
+.contact-btn-icon { display:flex; align-items:center; justify-content:center; color:var(--accent); opacity:0.72; flex-shrink:0; }
+.contact-btn:hover .contact-btn-icon { opacity:1; }
 
-/* 文字列 */
-.contact-btn-body {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  min-width: 0;
-}
+.contact-btn-body { display:flex; flex-direction:column; gap:3px; min-width:0; }
+.contact-btn-label { font-family:var(--font-mono); font-size:10px; color:var(--text-3); letter-spacing:0.1em; text-transform:uppercase; }
+.contact-btn-value { font-size:14.5px; color:var(--text-1); font-weight:500; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
-.contact-btn-label {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--text-3);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-.contact-btn-value {
-  font-size: 14.5px;
-  color: var(--text-1);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* 操作列 */
+/* 操作列 — 强制单行 */
 .contact-btn-action {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  font-size: 16px;
-  color: var(--text-3);
-  transition: color 0.2s, transform 0.2s;
-  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: flex-end;
+  font-size:16px; color:var(--text-3);
+  transition: color .2s, transform .2s;
+  flex-shrink: 0; white-space: nowrap; min-width: 32px;
 }
-.contact-btn:hover .contact-btn-action {
-  color: var(--accent);
-  transform: translateX(3px);
-}
+.contact-btn:hover .contact-btn-action { color:var(--accent); transform:translateX(3px); }
 
 .contact-copied {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: var(--accent);
-  letter-spacing: 0.08em;
+  font-family: var(--font-mono); font-size: 10px;
+  color: var(--accent); letter-spacing: 0.08em;
+  white-space: nowrap; display: inline-block;
 }
+.contact-copy-icon { font-size:16px; line-height:1; opacity:0.6; }
+.contact-btn:hover .contact-copy-icon { opacity:1; }
 
-.contact-copy-icon {
-  font-size: 16px;
-  line-height: 1;
-  opacity: 0.6;
-}
-.contact-btn:hover .contact-copy-icon { opacity: 1; }
-
-/* 底部 star 提示 */
 .contact-star-hint {
-  margin-top: 16px;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--text-3);
-  letter-spacing: 0.06em;
-  line-height: 1.7;
-  text-align: center;
-  padding: 14px 0 0;
-  border-top: 1px solid rgba(201,168,76,0.07);
+  margin-top:14px; font-family:var(--font-mono); font-size:11px;
+  color:var(--text-3); letter-spacing:0.06em; line-height:1.7;
+  text-align:center; padding:14px 0 0; border-top:1px solid rgba(201,168,76,0.07);
 }
 
-@media (max-width: 600px) {
-  .contact-section { padding: 96px 0 80px; }
-  .contact-btn-value { font-size: 13px; }
-  .contact-btn { padding: 16px 16px; }
+/* ── WeChat 二维码 Modal ── */
+.wechat-overlay {
+  position:fixed; inset:0; z-index:200;
+  background:rgba(4,5,14,0.82); backdrop-filter:blur(8px);
+  display:flex; align-items:center; justify-content:center;
 }
+.wechat-modal {
+  background:var(--bg-card); border:1px solid rgba(201,168,76,0.15);
+  border-radius:14px; padding:36px 40px 32px;
+  position:relative; text-align:center;
+  max-width:300px; width:90%;
+}
+.wechat-close {
+  position:absolute; top:14px; right:18px;
+  background:none; border:none; font-size:22px;
+  color:var(--text-3); cursor:pointer; line-height:1;
+  transition:color .2s;
+}
+.wechat-close:hover { color:var(--text-1); }
+.wechat-label {
+  font-family:var(--font-mono); font-size:11px; color:var(--accent);
+  letter-spacing:0.14em; text-transform:uppercase; opacity:0.8; margin-bottom:20px;
+}
+.wechat-qr {
+  width:200px; height:200px; border-radius:8px;
+  display:block; margin:0 auto;
+  border:1px solid rgba(201,168,76,0.12);
+}
+.wechat-hint {
+  margin-top:16px; font-family:var(--font-mono); font-size:11px;
+  color:var(--text-3); letter-spacing:0.06em;
+}
+
+@media(max-width:600px){ .contact-section{padding:96px 0 80px;} .contact-btn-value{font-size:13px;} }

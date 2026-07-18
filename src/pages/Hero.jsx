@@ -7,7 +7,6 @@ export default function Hero() {
   const canvasRef    = useRef(null);
   const containerRef = useRef(null);
 
-  // 价格图 canvas
   useEffect(() => {
     const canvas = canvasRef.current, container = containerRef.current;
     if (!canvas || !container) return;
@@ -29,14 +28,14 @@ export default function Hero() {
       for (let i = 1; i < p.length; i++) { const mx = (p[i-1].x + p[i].x) / 2; ctx.bezierCurveTo(mx, p[i-1].y, mx, p[i].y, p[i].x, p[i].y); }
       ctx.lineTo(p[p.length-1].x, H); ctx.closePath();
       const g = ctx.createLinearGradient(0, 0, 0, H);
-      g.addColorStop(0, 'rgba(201,168,76,0.14)'); g.addColorStop(1, 'rgba(201,168,76,0)');
+      g.addColorStop(0, 'rgba(201,168,76,0.13)'); g.addColorStop(1, 'rgba(201,168,76,0)');
       ctx.fillStyle = g; ctx.fill();
       ctx.beginPath(); ctx.moveTo(p[0].x, p[0].y);
       for (let i = 1; i < p.length; i++) { const mx = (p[i-1].x + p[i].x) / 2; ctx.bezierCurveTo(mx, p[i-1].y, mx, p[i].y, p[i].x, p[i].y); }
-      ctx.strokeStyle = 'rgba(201,168,76,0.6)'; ctx.lineWidth = 1.5; ctx.stroke();
+      ctx.strokeStyle = 'rgba(201,168,76,0.55)'; ctx.lineWidth = 1.5; ctx.stroke();
       const last = p[p.length-1], gw = Math.sin(t * 2) * 3;
-      ctx.beginPath(); ctx.arc(last.x, last.y, 8 + gw, 0, Math.PI*2); ctx.fillStyle = 'rgba(201,168,76,0.12)'; ctx.fill();
-      ctx.beginPath(); ctx.arc(last.x, last.y, 3, 0, Math.PI*2); ctx.fillStyle = '#c9a84c'; ctx.fill();
+      ctx.beginPath(); ctx.arc(last.x, last.y, 7 + gw, 0, Math.PI*2); ctx.fillStyle = 'rgba(201,168,76,0.1)'; ctx.fill();
+      ctx.beginPath(); ctx.arc(last.x, last.y, 2.5, 0, Math.PI*2); ctx.fillStyle = '#c9a84c'; ctx.fill();
       animId = requestAnimationFrame(render);
     };
     animId = requestAnimationFrame(render);
@@ -45,16 +44,15 @@ export default function Hero() {
 
   return (
     <div className="hero-page">
-      {/* ═══ HERO SECTION ═══ */}
       <section className="hero-section">
         <div className="hero-inner">
 
-          {/* 状态栏 — 无时钟 */}
+          {/* 状态栏 */}
           <div className="hero-top">
             <div className="hero-top-loc">
               <span>坐标 珠海</span>
               <span className="arr"> → </span>
-              <b>BNBU · 计算机科学与技术</b>
+              <b>BNBU · CS</b>
             </div>
             <div className="hero-top-status">
               <span className="hero-spark">✦</span>
@@ -65,38 +63,17 @@ export default function Hero() {
 
           <hr className="hero-rule" />
 
-          {/* 大字标题 — 中英文统一 */}
+          {/* 大字标题 — 换行 + 缩进 */}
           <h1 className="hero-heading">
-            Hi, this is
-            <span className="hero-name"> Leon Yu<span className="hero-dot">.</span></span>
+            <span className="hero-heading-line1">Hi, this is</span>
+            <span className="hero-heading-line2">Leon Yu<span className="hero-dot">.</span></span>
           </h1>
 
-          {/* 元信息 */}
-          <div className="hero-meta">
-            <p>
-              <span className="hero-lbl">Now</span>
-              <span className="arr">→ </span>
-              <b>HKBU (Zhuhai Campus) · Computer Science · Year 1</b>
-            </p>
-            <p>
-              <span className="hero-lbl">Target</span>
-              <span className="arr">→ </span>
-              <b>Quant Strategy Research · PM · AI</b>
-            </p>
-            <p>
-              <span className="hero-lbl">Building</span>
-              <span className="arr">→ </span>
-              <b>Cross-Market Idiosyncratic Reversion · DayAlpha · end-to-end quant</b>
-            </p>
-          </div>
-
-          {/* CTA */}
+          {/* CTA 按钮 */}
           <div className="hero-btns">
             <Link to="/projects" className="btn-primary">View Projects →</Link>
             <Link to="/contact"  className="btn-ghost">Say Hi</Link>
           </div>
-
-          <div className="hero-scroll-cue" aria-hidden="true">↓ SCROLL</div>
         </div>
 
         {/* 星座 */}
@@ -117,16 +94,19 @@ export default function Hero() {
           <circle cx="190" cy="220" r="1"   fill="rgba(201,168,76,0.25)"/>
         </svg>
 
-        {/* 价格图 — 向上移 */}
+        {/* 价格图 */}
         <div className="hero-chart-wrap" ref={containerRef} aria-hidden="true">
           <div className="hero-chart-grid" />
           <canvas ref={canvasRef} className="hero-chart-canvas" />
-          <span className="card-corner cc-tl" /><span className="card-corner cc-tr" />
-          <span className="card-corner cc-bl" /><span className="card-corner cc-br" />
+          <span className="card-corner cc-tl"/><span className="card-corner cc-tr"/>
+          <span className="card-corner cc-bl"/><span className="card-corner cc-br"/>
         </div>
+
+        {/* ↓ SCROLL — 绝对居中底部 */}
+        <div className="hero-scroll-cue" aria-hidden="true">↓ SCROLL</div>
       </section>
 
-      {/* ═══ 完整关于页面 — 直接嵌入 ═══ */}
+      {/* 完整 About 嵌入 */}
       <div id="about">
         <About embedded={true} />
       </div>
