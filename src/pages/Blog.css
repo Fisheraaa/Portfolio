@@ -37,16 +37,16 @@
   top: -8px; left: -4px;
   font-family: var(--font-display);
   font-style: italic;
-  font-size: 68px;
+  font-size: 96px;
   font-weight: 700;
-  color: rgba(201,168,76,0.05);
+  color: rgba(201,168,76,0.10);
   line-height: 1;
   letter-spacing: -0.03em;
   pointer-events: none;
   user-select: none;
   transition: color .3s;
 }
-.blog-row:hover .blog-ghost-num { color: rgba(201,168,76,0.09); }
+.blog-row:hover .blog-ghost-num { color: rgba(201,168,76,0.17); }
 
 .blog-tag-badges { display:flex; flex-direction:column; gap:4px; margin-top:52px; }
 .blog-tag-badge {

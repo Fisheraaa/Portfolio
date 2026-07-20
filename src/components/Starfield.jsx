@@ -1,17 +1,16 @@
 import { useEffect, useRef } from 'react';
 
-/* f0xy 风格双元素光标 — 点 + 延迟圆环，70% 尺寸 */
 export default function Starfield() {
   const canvasRef = useRef(null);
   const dotRef    = useRef(null);
   const ringRef   = useRef(null);
+  const glowRef   = useRef(null);   // 大光晕 blob
 
   /* ── 星空 canvas ── */
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
     let animId, shootTimers = [], shootingStars = [], stars = [];
-
     const resize = () => {
       canvas.width  = window.innerWidth;
       canvas.height = window.innerHeight;
@@ -24,7 +23,6 @@ export default function Starfield() {
     };
     resize();
     window.addEventListener('resize', resize);
-
     const spawnShoot = () => {
       shootingStars.push({
         x: Math.random() * canvas.width * 0.85, y: Math.random() * canvas.height * 0.45,
@@ -40,7 +38,6 @@ export default function Starfield() {
     shootTimers.push(sched(2500, 5000));
     setTimeout(() => shootTimers.push(sched(3000, 6000)), 1200);
     setTimeout(() => shootTimers.push(sched(4000, 7000)), 2800);
-
     let t = 0;
     const render = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -58,9 +55,9 @@ export default function Starfield() {
         ss.alpha = prog < 0.25 ? prog / 0.25 : 1 - (prog - 0.25) / 0.75;
         const tx = ss.x - Math.cos(ss.angle) * ss.len, ty = ss.y - Math.sin(ss.angle) * ss.len;
         const g = ctx.createLinearGradient(ss.x, ss.y, tx, ty);
-        g.addColorStop(0,   `rgba(225,198,128,${ss.alpha * 0.95})`);
+        g.addColorStop(0, `rgba(225,198,128,${ss.alpha * 0.95})`);
         g.addColorStop(0.4, `rgba(225,198,128,${ss.alpha * 0.4})`);
-        g.addColorStop(1,   'rgba(225,198,128,0)');
+        g.addColorStop(1, 'rgba(225,198,128,0)');
         ctx.beginPath(); ctx.moveTo(ss.x, ss.y); ctx.lineTo(tx, ty);
         ctx.strokeStyle = g; ctx.lineWidth = 1.4; ctx.stroke();
         ctx.beginPath(); ctx.arc(ss.x, ss.y, 1.8, 0, Math.PI * 2);
@@ -72,43 +69,51 @@ export default function Starfield() {
     return () => { window.removeEventListener('resize', resize); cancelAnimationFrame(animId); shootTimers.forEach(clearTimeout); };
   }, []);
 
-  /* ── f0xy 光标：点(instant) + 圆环(lerp) ── */
+  /* ── 光标系统：点 + 圆环 + 大光晕 ── */
   useEffect(() => {
     const dot  = dotRef.current;
     const ring = ringRef.current;
-    if (!dot || !ring) return;
+    const glow = glowRef.current;
+    if (!dot || !ring || !glow) return;
 
-    let mx = -200, my = -200;
-    let rx = -200, ry = -200;
+    let mx = -400, my = -400;   // 精确位置 → 点
+    let rx = -400, ry = -400;   // 圆环跟随（中速 lerp）
+    let gx = -400, gy = -400;   // 光晕跟随（慢速 lerp）
     let rafId;
 
     const onMove = e => {
       mx = e.clientX; my = e.clientY;
+      // 点：立即跟随
       dot.style.left = mx + 'px';
       dot.style.top  = my + 'px';
     };
     document.addEventListener('mousemove', onMove);
 
-    /* 圆环 lerp 跟随 */
-    const animRing = () => {
+    const animate = () => {
+      // 圆环：中速 lerp
       rx += (mx - rx) * 0.12;
       ry += (my - ry) * 0.12;
       ring.style.left = rx + 'px';
       ring.style.top  = ry + 'px';
-      rafId = requestAnimationFrame(animRing);
+      // 大光晕：慢速 lerp
+      gx += (mx - gx) * 0.055;
+      gy += (my - gy) * 0.055;
+      glow.style.left = gx + 'px';
+      glow.style.top  = gy + 'px';
+      rafId = requestAnimationFrame(animate);
     };
-    animRing();
+    animate();
 
-    /* 悬停状态 — 扫描 a/button，MutationObserver 保持最新 */
-    const setHover = interactive => document.body.classList.toggle('cursor-hover', interactive);
-    const attachHover = () => {
-      document.querySelectorAll('a, button, [role="button"], [tabindex]').forEach(el => {
+    // 悬停状态
+    const setHover = on => document.body.classList.toggle('cursor-hover', on);
+    const attach = () => {
+      document.querySelectorAll('a,button,[role="button"],[tabindex]').forEach(el => {
         el.addEventListener('mouseenter', () => setHover(true));
         el.addEventListener('mouseleave', () => setHover(false));
       });
     };
-    attachHover();
-    const mo = new MutationObserver(attachHover);
+    attach();
+    const mo = new MutationObserver(attach);
     mo.observe(document.body, { childList: true, subtree: true });
 
     return () => {
@@ -120,15 +125,26 @@ export default function Starfield() {
 
   return (
     <>
-      {/* 星空 */}
       <canvas ref={canvasRef} style={{ position:'fixed', inset:0, zIndex:0, pointerEvents:'none' }} />
 
-      {/* 光标点 */}
-      <div ref={dotRef} className="cursor-dot" />
-      {/* 光标圆环 */}
+      {/* 大光晕 blob — 320×320，慢速跟随，是主要"光晕感" */}
+      <div ref={glowRef} style={{
+        position:'fixed', zIndex:1, pointerEvents:'none',
+        width:320, height:320,
+        marginLeft:-160, marginTop:-160,    // 以光标为中心
+        borderRadius:'50%',
+        background:'radial-gradient(circle, rgba(201,168,76,0.11) 0%, rgba(201,168,76,0.03) 45%, transparent 70%)',
+        filter:'blur(18px)',
+        transition:'opacity .3s',
+      }} />
+
+      {/* 圆环 — 44px，中速跟随 */}
       <div ref={ringRef} className="cursor-ring" />
 
-      {/* 环境光晕 */}
+      {/* 精确点 — 8px，立即跟随 */}
+      <div ref={dotRef} className="cursor-dot" />
+
+      {/* 环境光晕（固定，不跟随鼠标）*/}
       <div style={{ position:'fixed', width:500, height:500, background:'radial-gradient(circle, rgba(201,168,76,0.055) 0%, transparent 65%)', top:-100, right:-60, filter:'blur(70px)', pointerEvents:'none', zIndex:0 }}/>
       <div style={{ position:'fixed', width:440, height:440, background:'radial-gradient(circle, rgba(28,14,110,0.24) 0%, transparent 65%)', bottom:-60, left:-60, filter:'blur(60px)', pointerEvents:'none', zIndex:0 }}/>
 
@@ -145,28 +161,37 @@ export default function Starfield() {
 
       <style>{`
         body { cursor: none; }
+
+        /* 精确点 */
         .cursor-dot {
           position: fixed; z-index: 9999; pointer-events: none;
-          width: 7px; height: 7px; border-radius: 50%;
+          width: 8px; height: 8px; border-radius: 50%;
           background: #c9a84c;
-          transform: translate(-50%, -50%);
-          transition: width .15s, height .15s, opacity .15s;
+          margin-left: -4px; margin-top: -4px;
+          transition: opacity .15s, transform .15s;
         }
+
+        /* 圆环 — 44px 比之前 28px 大得多 */
         .cursor-ring {
           position: fixed; z-index: 9998; pointer-events: none;
-          width: 28px; height: 28px; border-radius: 50%;
-          border: 1.5px solid rgba(201,168,76,0.5);
-          transform: translate(-50%, -50%);
+          width: 44px; height: 44px; border-radius: 50%;
+          border: 1.5px solid rgba(201,168,76,0.55);
+          margin-left: -22px; margin-top: -22px;
           transition: width .3s cubic-bezier(.16,1,.3,1),
                       height .3s cubic-bezier(.16,1,.3,1),
-                      border-color .3s, background .3s;
+                      border-color .3s, background .3s,
+                      margin .3s cubic-bezier(.16,1,.3,1);
         }
-        body.cursor-hover .cursor-dot  { opacity: 0; }
+
+        /* 悬停状态：点消失，圆环扩展 */
+        body.cursor-hover .cursor-dot  { opacity: 0; transform: scale(0.5); }
         body.cursor-hover .cursor-ring {
-          width: 44px; height: 44px;
-          border-color: rgba(201,168,76,0.85);
-          background: rgba(201,168,76,0.05);
+          width: 68px; height: 68px;
+          margin-left: -34px; margin-top: -34px;
+          border-color: rgba(201,168,76,0.9);
+          background: rgba(201,168,76,0.06);
         }
+
         @keyframes datafrag { 0%{opacity:.3} 50%{opacity:1} 100%{opacity:.28} }
       `}</style>
     </>

@@ -131,7 +131,7 @@ export default function Contact() {
               <button className="wechat-close" onClick={()=>setShowWechat(false)}>×</button>
               <div className="wechat-label">WeChat</div>
               <img
-                src={`${import.meta.env.BASE_URL}wechat-qr.png`}
+                src={`${import.meta.env.BASE_URL}wechat-qr.jpg`}
                 alt="WeChat QR Code"
                 className="wechat-qr"
               />
