@@ -1,11 +1,14 @@
 import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import About from './About';
 import './Hero.css';
 
 export default function Hero() {
   const canvasRef    = useRef(null);
   const containerRef = useRef(null);
+  const { i18n }     = useTranslation();
+  const isZh         = i18n.language === 'zh';
 
   useEffect(() => {
     const canvas = canvasRef.current, container = containerRef.current;
@@ -47,32 +50,36 @@ export default function Hero() {
       <section className="hero-section">
         <div className="hero-inner">
 
-          {/* 状态栏 */}
+          {/* 状态栏 — 支持中英文切换 */}
           <div className="hero-top">
             <div className="hero-top-loc">
-              <span>坐标 珠海</span>
+              <span>{isZh ? '坐标 珠海' : 'Based in Zhuhai'}</span>
               <span className="arr"> → </span>
               <b>BNBU · CS</b>
             </div>
             <div className="hero-top-status">
               <span className="hero-spark">✦</span>
               <span className="arr"> </span>
-              <b>实习申请中</b>
+              <b>{isZh ? '实习申请中' : 'Open to internships'}</b>
             </div>
           </div>
 
           <hr className="hero-rule" />
 
-          {/* 大字标题 — 换行 + 缩进 */}
+          {/* 大字标题 */}
           <h1 className="hero-heading">
             <span className="hero-heading-line1">Hi, this is</span>
             <span className="hero-heading-line2">Leon Yu<span className="hero-dot">.</span></span>
           </h1>
 
-          {/* CTA 按钮 */}
+          {/* CTA 按钮 — 支持中英文切换 */}
           <div className="hero-btns">
-            <Link to="/projects" className="btn-primary">View Projects →</Link>
-            <Link to="/contact"  className="btn-ghost">Say Hi</Link>
+            <Link to="/projects" className="btn-primary">
+              {isZh ? '查看项目' : 'View Projects'} →
+            </Link>
+            <Link to="/contact" className="btn-ghost">
+              {isZh ? '打个招呼' : 'Say Hi'}
+            </Link>
           </div>
         </div>
 
@@ -83,14 +90,11 @@ export default function Hero() {
           <line x1="180" y1="80"  x2="150" y2="150" stroke="rgba(201,168,76,0.08)" strokeWidth="0.5"/>
           <line x1="40"  y1="60"  x2="80"  y2="130" stroke="rgba(201,168,76,0.08)" strokeWidth="0.5"/>
           <line x1="80"  y1="130" x2="150" y2="150" stroke="rgba(201,168,76,0.07)" strokeWidth="0.5"/>
-          <line x1="80"  y1="130" x2="60"  y2="210" stroke="rgba(201,168,76,0.06)" strokeWidth="0.5"/>
           <line x1="150" y1="150" x2="190" y2="220" stroke="rgba(201,168,76,0.06)" strokeWidth="0.5"/>
           <circle cx="40"  cy="60"  r="2"   fill="rgba(201,168,76,0.55)"/>
           <circle cx="110" cy="30"  r="2.5" fill="rgba(201,168,76,0.75)"/>
-          <circle cx="180" cy="80"  r="1.5" fill="rgba(201,168,76,0.4)"/>
           <circle cx="80"  cy="130" r="2"   fill="rgba(201,168,76,0.5)"/>
           <circle cx="150" cy="150" r="1.5" fill="rgba(201,168,76,0.35)"/>
-          <circle cx="60"  cy="210" r="1.5" fill="rgba(201,168,76,0.3)"/>
           <circle cx="190" cy="220" r="1"   fill="rgba(201,168,76,0.25)"/>
         </svg>
 
@@ -102,11 +106,9 @@ export default function Hero() {
           <span className="card-corner cc-bl"/><span className="card-corner cc-br"/>
         </div>
 
-        {/* ↓ SCROLL — 绝对居中底部 */}
         <div className="hero-scroll-cue" aria-hidden="true">↓ SCROLL</div>
       </section>
 
-      {/* 完整 About 嵌入 */}
       <div id="about">
         <About embedded={true} />
       </div>
