@@ -43,7 +43,8 @@
 /* 第二行缩进：按截图绿框位置约 0.85em */
 .hero-heading-line2 {
   color: var(--accent);
-  padding-left: 0.85em;
+  padding-left: 0.94em;
+  white-space: nowrap;    /* ← 加这一行，禁止换行，可以超出容器 */
 }
 .hero-dot { opacity: 0.75; }
 
@@ -95,14 +96,14 @@
 .hero-chart-wrap {
   position: absolute;
   /* 贴近右边缘，留少量间距 */
-  right: clamp(8px, 1vw, 18px);
+  right: 80px;
   /* 顶部从 31% 开始 */
-  top: 31%;
+  top: 32%;
   /* 宽度：视口右侧约 45% */
-  width: 44vw;
+  width: 36vw;
   max-width: 700px;
   /* 高度：约 54% 视口高 */
-  height: 54vh;
+  height: 44vh;
   max-height: 430px;
   background: rgba(7,9,26,0.52);
   border: 1px solid rgba(201,168,76,0.09);

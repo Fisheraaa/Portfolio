@@ -106,10 +106,10 @@ export default function Starfield() {
           以鼠标为圆心，纯背景层，不遮挡任何交互                     */}
       <div ref={glowRef} style={{
         position: 'fixed', zIndex: 0, pointerEvents: 'none',
-        width: 560, height: 560,
-        marginLeft: -280, marginTop: -280,
+        width: 700, height: 700,
+        marginLeft: -350, marginTop: -350,
         borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(201,168,76,0.10) 0%, rgba(201,168,76,0.025) 40%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(201,168,76,0.25) 0%, rgba(201,168,76,0.05) 40%, transparent 70%)',
         filter: 'blur(40px)',
         willChange: 'left, top',
       }} />

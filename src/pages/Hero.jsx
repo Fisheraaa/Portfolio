@@ -54,8 +54,7 @@ export default function Hero() {
           <div className="hero-top">
             <div className="hero-top-loc">
               <span>{isZh ? '坐标 珠海' : 'Based in Zhuhai'}</span>
-              <span className="arr"> → </span>
-              <b>BNBU · CS</b>
+
             </div>
             <div className="hero-top-status">
               <span className="hero-spark">✦</span>
@@ -69,7 +68,7 @@ export default function Hero() {
           {/* 大字标题 */}
           <h1 className="hero-heading">
             <span className="hero-heading-line1">Hi, this is</span>
-            <span className="hero-heading-line2">Leon Yu<span className="hero-dot">.</span></span>
+            <span className="hero-heading-line2">Leon Yu<span className="hero-dot"></span></span>
           </h1>
 
           {/* CTA 按钮 — 支持中英文切换 */}
@@ -106,7 +105,7 @@ export default function Hero() {
           <span className="card-corner cc-bl"/><span className="card-corner cc-br"/>
         </div>
 
-        <div className="hero-scroll-cue" aria-hidden="true">↓ SCROLL</div>
+        <div className="hero-scroll-cue" aria-hidden="true">↓ <b>{isZh ? '向下了解更多' : 'SCROLL'}</b></div>
       </section>
 
       <div id="about">
