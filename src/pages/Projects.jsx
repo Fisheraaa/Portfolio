@@ -25,11 +25,22 @@ export default function Projects() {
             <motion.div
               className="project-card"
               key={proj.id}
-              /* ── 滚动揭示动效 ── */
+              /* ── 滚动揭示 ── */
               initial={{ opacity: 0, y: 32 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
-              transition={{ delay: (i % 3) * 0.08, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              transition={{
+                delay: (i % 3) * 0.08,
+                duration: 0.5,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              /* ── 悬浮：Framer Motion 直接控制 transform，不与 CSS 冲突 ── */
+              whileHover={{
+                scale: 1.05,
+                y: -8,
+                zIndex: 10,
+                transition: { duration: 0.35, ease: [0.22, 0.61, 0.36, 1] },
+              }}
               onClick={() => setSelected(proj)}
             >
               <span className="card-corner cc-tl" />
@@ -54,20 +65,30 @@ export default function Projects() {
                 </a>
               </div>
 
-              <div className="card-num">{proj.id} <span className="card-date">{proj.date}</span></div>
-              <div className="card-title">{isZh ? proj.titleZh : proj.titleEn}</div>
+              <div className="card-num">
+                {proj.id}
+                <span className="card-date">{proj.date}</span>
+              </div>
+
+              <div className="card-title">
+                {isZh ? proj.titleZh : proj.titleEn}
+              </div>
 
               <div className="tech-tags">
-                {proj.tags.map(tag => <span key={tag} className="tech-tag">{tag}</span>)}
+                {proj.tags.map(tag => (
+                  <span key={tag} className="tech-tag">{tag}</span>
+                ))}
               </div>
 
               <hr className="card-divider" />
 
-              <p className="card-desc">{isZh ? proj.shortDescZh : proj.shortDescEn}</p>
+              <p className="card-desc">
+                {isZh ? proj.shortDescZh : proj.shortDescEn}
+              </p>
 
               <button
                 className="card-link"
-                style={{ marginTop:'auto', background:'none', border:'none', cursor:'pointer', padding:0 }}
+                style={{ marginTop: 'auto', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
                 onClick={() => setSelected(proj)}
               >
                 {t('projects.viewDetail')} →
@@ -77,7 +98,11 @@ export default function Projects() {
         </div>
       </div>
 
-      <ProjectModal isOpen={!!selected} project={selected} onClose={() => setSelected(null)} />
+      <ProjectModal
+        isOpen={!!selected}
+        project={selected}
+        onClose={() => setSelected(null)}
+      />
     </motion.section>
   );
 }

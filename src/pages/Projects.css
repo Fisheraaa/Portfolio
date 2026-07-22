@@ -14,14 +14,13 @@
   margin-bottom: 64px;
 }
 
-/* ── 卡片网格 ── */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 22px;
 }
 
-/* ── 悬浮效果：悬浮的卡放大，周围卡缩小被挤开 ── */
+/* ── 卡片基础 ── */
 .project-card {
   position: relative;
   background: var(--bg-card);
@@ -32,50 +31,42 @@
   flex-direction: column;
   gap: 16px;
   cursor: pointer;
-  /* 同时过渡 transform + 标题颜色变化等 */
-  transition:
-    transform    0.38s cubic-bezier(.22,.61,.36,1),
-    box-shadow   0.38s cubic-bezier(.22,.61,.36,1),
-    border-color 0.25s,
-    opacity      0.3s;
-  will-change: transform;
-  z-index: 1;
+  /* filter 过渡：用于兄弟卡的「被挤开」暗化感 */
+  transition: filter 0.35s cubic-bezier(.22,.61,.36,1),
+              border-color 0.25s,
+              box-shadow 0.35s cubic-bezier(.22,.61,.36,1);
 }
 
-/* 当网格中有任意卡被悬浮时，其他卡缩小 + 轻度透明 → 制造"被挤开"感 */
-.projects-grid:hover .project-card {
-  transform: scale(0.96) translateY(3px);
-  opacity: 0.72;
+/* ── 悬浮效果 ──
+   transform/scale 由 Framer Motion whileHover 控制，不写在 CSS 里
+   兄弟卡用 filter:brightness 暗化 → 制造「被挤开」感
+   标题颜色改用 CSS :hover 控制（color 不被 Framer Motion 覆盖）
+── */
+
+/* 当网格中有任何卡被 hover 时，所有卡先暗化 */
+.projects-grid:has(.project-card:hover) .project-card {
+  filter: brightness(0.55) saturate(0.7);
+  border-color: rgba(201,168,76,0.06);
 }
 
-/* 被悬浮的那张卡放大、浮起、金边、完全不透明 */
-.projects-grid:hover .project-card:hover {
-  transform: scale(1.04) translateY(-6px);
-  opacity: 1;
-  z-index: 10;
-  border-color: rgba(201,168,76,0.35);
+/* 被 hover 的那张：恢复亮度 + 金边 + 阴影 */
+.projects-grid:has(.project-card:hover) .project-card:hover {
+  filter: brightness(1) saturate(1);
+  border-color: rgba(201,168,76,0.38);
   box-shadow:
     0 28px 72px rgba(0,0,0,0.65),
-    0 0  48px rgba(201,168,76,0.08);
+    0 0  48px rgba(201,168,76,0.09);
 }
 
-/* 悬浮时标题变金色 */
-.projects-grid:hover .project-card:hover .card-title {
+/* 标题：hover 时变金色（CSS color 不受 Framer Motion 干扰）*/
+.project-card .card-title {
+  transition: color 0.25s;
+}
+.project-card:hover .card-title {
   color: var(--accent);
 }
 
-/* card-title 本身也要有 color 过渡 */
-.card-title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--text-1);
-  line-height: 1.35;
-  transition: color 0.25s;
-}
-
-/* ── 其余样式保持不变 ── */
+/* ── 其余样式不变 ── */
 .card-header {
   display: flex;
   justify-content: space-between;
@@ -97,6 +88,14 @@
   opacity: 0.55;
   letter-spacing: 0.06em;
 }
+.card-title {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-1);
+  line-height: 1.35;
+}
 .card-divider {
   border: none;
   border-top: 1px solid var(--border);
@@ -111,46 +110,32 @@
   letter-spacing: 0.02em;
 }
 
-/* ── Modal 样式（完整保留）── */
-.modal-img-wrap {
-  width: 100%; border-radius: 8px; overflow: hidden;
-  margin-bottom: 28px; border: 1px solid var(--border); background: var(--bg);
-}
-.modal-img {
-  width: 100%; height: auto; max-height: 280px;
-  object-fit: cover; object-position: top; display: block;
-  opacity: 0.88; transition: opacity 0.2s;
-}
-.modal-img:hover { opacity: 1; }
-.modal-img-placeholder {
-  width: 100%; height: 180px;
-  background: repeating-linear-gradient(45deg, rgba(201,168,76,0.03), rgba(201,168,76,0.03) 1px, transparent 1px, transparent 12px);
-  border: 1px solid var(--border); border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-mono); font-size: 11px;
-  letter-spacing: 0.1em; color: var(--text-3); margin-bottom: 28px;
-}
-.modal-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
-.modal-title  { font-size: 24px; color: var(--text-1); line-height: 1.3; }
-.modal-section-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; opacity: 0.75; }
-.modal-bg { font-family: var(--font-zh); font-size: 14px; font-weight: 300; color: var(--text-2); line-height: 1.85; margin-bottom: 26px; letter-spacing: 0.025em; }
-.modal-highlights { list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 10px; }
-.modal-highlights li { font-family: var(--font-zh); font-size: 13.5px; font-weight: 300; color: var(--text-2); line-height: 1.75; padding-left: 18px; position: relative; letter-spacing: 0.02em; }
-.modal-highlights li::before { content: '—'; position: absolute; left: 0; color: var(--accent); opacity: 0.55; font-family: var(--font-mono); font-size: 11px; }
-.modal-github-link { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--accent); opacity: 0.65; text-decoration: none; transition: opacity 0.2s; background: none; border: none; cursor: pointer; }
-.modal-github-link:hover { opacity: 1; }
+/* ── Modal 样式（原样保留）── */
+.modal-img-wrap { width:100%; border-radius:8px; overflow:hidden; margin-bottom:28px; border:1px solid var(--border); background:var(--bg); }
+.modal-img { width:100%; height:auto; max-height:280px; object-fit:cover; object-position:top; display:block; opacity:.88; transition:opacity .2s; }
+.modal-img:hover { opacity:1; }
+.modal-img-placeholder { width:100%; height:180px; background:repeating-linear-gradient(45deg,rgba(201,168,76,.03),rgba(201,168,76,.03) 1px,transparent 1px,transparent 12px); border:1px solid var(--border); border-radius:8px; display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; color:var(--text-3); margin-bottom:28px; }
+.modal-header { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:22px; }
+.modal-title { font-size:24px; color:var(--text-1); line-height:1.3; }
+.modal-section-label { font-family:var(--font-mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent); margin-bottom:10px; opacity:.75; }
+.modal-bg { font-family:var(--font-zh); font-size:14px; font-weight:300; color:var(--text-2); line-height:1.85; margin-bottom:26px; letter-spacing:.025em; }
+.modal-highlights { list-style:none; padding:0; margin:0 0 28px; display:flex; flex-direction:column; gap:10px; }
+.modal-highlights li { font-family:var(--font-zh); font-size:13.5px; font-weight:300; color:var(--text-2); line-height:1.75; padding-left:18px; position:relative; letter-spacing:.02em; }
+.modal-highlights li::before { content:'—'; position:absolute; left:0; color:var(--accent); opacity:.55; font-family:var(--font-mono); font-size:11px; }
+.modal-github-link { display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:12px; letter-spacing:.06em; color:var(--accent); opacity:.65; text-decoration:none; transition:opacity .2s; background:none; border:none; cursor:pointer; }
+.modal-github-link:hover { opacity:1; }
 
 @media (max-width: 900px) {
   .projects-inner { padding: 0 32px; }
   .projects-grid  { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) {
-  .projects-inner { padding: 0 20px; }
+  .projects-inner  { padding: 0 20px; }
   .projects-section { padding: 96px 0 80px; }
-  .projects-grid { grid-template-columns: 1fr; gap: 16px; }
-  .project-card  { padding: 22px 20px; }
-  /* 移动端禁用群组 hover 效果（touch 体验不好）*/
-  .projects-grid:hover .project-card { transform: none; opacity: 1; }
-  .card-title { font-size: 16px; }
-  .card-desc  { font-size: 13px; }
+  .projects-grid   { grid-template-columns: 1fr; gap: 16px; }
+  .project-card    { padding: 22px 20px; }
+  /* 移动端禁用群组暗化（touch 体验差）*/
+  .projects-grid:has(.project-card:hover) .project-card { filter: none; }
+  .card-title      { font-size: 16px; }
+  .card-desc       { font-size: 13px; }
 }

@@ -15,34 +15,88 @@ export default function Hero() {
     if (!canvas || !container) return;
     const ctx = canvas.getContext('2d');
     let animId;
-    const resize = () => { canvas.width = container.clientWidth; canvas.height = container.clientHeight; };
-    window.addEventListener('resize', resize); resize();
-    const N = 44;
-    const pts = Array.from({ length: N }, (_, i) => {
-      const p = i / (N - 1);
-      return { x: p, baseY: 0.78 - p * 0.55 + Math.sin(p * Math.PI * 3) * 0.13,
-        phase: Math.random() * Math.PI * 2, speed: Math.random() * 0.018 + 0.008, amp: Math.random() * 0.04 + 0.018 };
-    });
+
+    const resize = () => {
+      canvas.width  = container.clientWidth;
+      canvas.height = container.clientHeight;
+    };
+    window.addEventListener('resize', resize);
+    resize();
+
+    /*
+     * 多层波形 — 像信号分析仪 / 示波器
+     * 每层波有独立频率、振幅、滚动速度和透明度
+     * 叠加在一起形成复杂但优雅的干涉图案
+     */
+    const waves = [
+      /* 主波：最亮、最宽、有填充渐变 */
+      { freq: 0.013, amp: 0.155, speed: 62,  alpha: 0.65, lw: 1.7, fill: true  },
+      /* 中频副波 */
+      { freq: 0.023, amp: 0.088, speed: 37,  alpha: 0.30, lw: 1.0, fill: false },
+      /* 低频慢波 */
+      { freq: 0.007, amp: 0.120, speed: 20,  alpha: 0.17, lw: 0.8, fill: false },
+      /* 高频细波 */
+      { freq: 0.041, amp: 0.048, speed: 95,  alpha: 0.11, lw: 0.6, fill: false },
+    ];
+
+    const getY = (x, t, w) =>
+      canvas.height * 0.5
+      + Math.sin((x + t * w.speed) * w.freq)               * canvas.height * w.amp
+      + Math.sin((x + t * w.speed) * w.freq * 2.15 + 0.9)  * canvas.height * w.amp * 0.32;
+
     const render = ts => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const W = canvas.width, H = canvas.height, t = ts * 0.001;
-      const p = pts.map(q => ({ x: q.x * W, y: (q.baseY + Math.sin(t * q.speed * 10 + q.phase) * q.amp) * H }));
-      ctx.beginPath(); ctx.moveTo(p[0].x, H); ctx.lineTo(p[0].x, p[0].y);
-      for (let i = 1; i < p.length; i++) { const mx = (p[i-1].x + p[i].x) / 2; ctx.bezierCurveTo(mx, p[i-1].y, mx, p[i].y, p[i].x, p[i].y); }
-      ctx.lineTo(p[p.length-1].x, H); ctx.closePath();
-      const g = ctx.createLinearGradient(0, 0, 0, H);
-      g.addColorStop(0, 'rgba(201,168,76,0.13)'); g.addColorStop(1, 'rgba(201,168,76,0)');
-      ctx.fillStyle = g; ctx.fill();
-      ctx.beginPath(); ctx.moveTo(p[0].x, p[0].y);
-      for (let i = 1; i < p.length; i++) { const mx = (p[i-1].x + p[i].x) / 2; ctx.bezierCurveTo(mx, p[i-1].y, mx, p[i].y, p[i].x, p[i].y); }
-      ctx.strokeStyle = 'rgba(201,168,76,0.55)'; ctx.lineWidth = 1.5; ctx.stroke();
-      const last = p[p.length-1], gw = Math.sin(t * 2) * 3;
-      ctx.beginPath(); ctx.arc(last.x, last.y, 7 + gw, 0, Math.PI*2); ctx.fillStyle = 'rgba(201,168,76,0.1)'; ctx.fill();
-      ctx.beginPath(); ctx.arc(last.x, last.y, 2.5, 0, Math.PI*2); ctx.fillStyle = '#c9a84c'; ctx.fill();
+      const W = canvas.width, H = canvas.height;
+      const t = ts * 0.001;
+      ctx.clearRect(0, 0, W, H);
+
+      waves.forEach(w => {
+        /* 收集各 x 处的 y 值 */
+        const pts = [];
+        for (let x = 0; x <= W; x += 2) pts.push([x, getY(x, t, w)]);
+
+        /* 渐变填充（只有主波） */
+        if (w.fill) {
+          ctx.beginPath();
+          ctx.moveTo(0, H);
+          pts.forEach(([x, y]) => ctx.lineTo(x, y));
+          ctx.lineTo(W, H);
+          ctx.closePath();
+          const g = ctx.createLinearGradient(0, 0, 0, H);
+          g.addColorStop(0, 'rgba(201,168,76,0.13)');
+          g.addColorStop(1, 'rgba(201,168,76,0)');
+          ctx.fillStyle = g;
+          ctx.fill();
+        }
+
+        /* 波形线 */
+        ctx.beginPath();
+        pts.forEach(([x, y], i) => (i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y)));
+        ctx.strokeStyle = `rgba(201,168,76,${w.alpha})`;
+        ctx.lineWidth   = w.lw;
+        ctx.stroke();
+      });
+
+      /* 主波右端的实时跳动圆点 */
+      const mw = waves[0];
+      const dotY = getY(W, t, mw);
+      const glow = 7 + Math.sin(t * 3.2) * 2.5;
+      ctx.beginPath();
+      ctx.arc(W - 2, dotY, glow, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(201,168,76,0.10)';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(W - 2, dotY, 2.5, 0, Math.PI * 2);
+      ctx.fillStyle = '#c9a84c';
+      ctx.fill();
+
       animId = requestAnimationFrame(render);
     };
+
     animId = requestAnimationFrame(render);
-    return () => { window.removeEventListener('resize', resize); cancelAnimationFrame(animId); };
+    return () => {
+      window.removeEventListener('resize', resize);
+      cancelAnimationFrame(animId);
+    };
   }, []);
 
   return (
@@ -50,11 +104,10 @@ export default function Hero() {
       <section className="hero-section">
         <div className="hero-inner">
 
-          {/* 状态栏 — 支持中英文切换 */}
+          {/* 状态栏 */}
           <div className="hero-top">
             <div className="hero-top-loc">
               <span>{isZh ? '坐标 珠海' : 'Based in Zhuhai'}</span>
-
             </div>
             <div className="hero-top-status">
               <span className="hero-spark">✦</span>
@@ -71,7 +124,7 @@ export default function Hero() {
             <span className="hero-heading-line2">Leon Yu<span className="hero-dot"></span></span>
           </h1>
 
-          {/* CTA 按钮 — 支持中英文切换 */}
+          {/* CTA 按钮 */}
           <div className="hero-btns">
             <Link to="/projects" className="btn-primary">
               {isZh ? '查看项目' : 'View Projects'} →
@@ -97,7 +150,7 @@ export default function Hero() {
           <circle cx="190" cy="220" r="1"   fill="rgba(201,168,76,0.25)"/>
         </svg>
 
-        {/* 价格图 */}
+        {/* 信号图 */}
         <div className="hero-chart-wrap" ref={containerRef} aria-hidden="true">
           <div className="hero-chart-grid" />
           <canvas ref={canvasRef} className="hero-chart-canvas" />

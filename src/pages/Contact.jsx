@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import './Contact.css';
+import CvModal from '../components/CvModal';
 
 const EMAILS = ['3137933563@qq.com', '2625123959g@gmail.com'];
 const GITHUB  = 'https://github.com/Fisheraaa';
@@ -11,6 +12,7 @@ export default function Contact() {
   const isZh = i18n.language === 'zh';
   const [copiedIdx, setCopiedIdx]   = useState(null);
   const [showWechat, setShowWechat] = useState(false);
+  const [cvOpen,    setCvOpen]    = useState(false);
 
   const copyEmail = (email, idx) => {
     navigator.clipboard.writeText(email).then(() => {
@@ -95,8 +97,8 @@ export default function Contact() {
             <div className="contact-btn-action">⊕</div>
           </button>
 
-          {/* 简历 */}
-          <a id="resume-link" href={resumeHref} target="_blank" rel="noopener" className="contact-btn">
+          {/* 简历 — 点击弹出语言选择 */}
+          <button className="contact-btn" onClick={() => setCvOpen(true)}>
             <div className="contact-btn-icon">
               <svg viewBox="0 0 30 24" width="22" height="18" fill="none">
                 <rect x="1.2" y="1.2" width="27.6" height="21.6" rx="3.4" stroke="currentColor" strokeWidth="1.7"/>
@@ -104,14 +106,15 @@ export default function Contact() {
               </svg>
             </div>
             <div className="contact-btn-body">
-              <div className="contact-btn-label">{isZh?'简历 / Résumé':'Résumé / CV'}</div>
-              <div className="contact-btn-value">{isZh?'下载 PDF':'Download PDF'}</div>
+              <div className="contact-btn-label">{isZh?'简历':'CV'}</div>
+              <div className="contact-btn-value">{isZh?'选择语言查看 PDF':'Select language for PDF'}</div>
             </div>
             <div className="contact-btn-action">↗</div>
-          </a>
+          </button>
+          <CvModal open={cvOpen} onClose={() => setCvOpen(false)} />
 
           <p className="contact-star-hint">
-            {isZh?'觉得还不错的话，欢迎去 GitHub 点个 star ⭐':'If you like what you see, a GitHub star would mean a lot ⭐'}
+            {isZh?'觉得不错的话，欢迎去 GitHub 点个 star ⭐':'If you like what you see, a GitHub star would mean a lot ⭐'}
           </p>
         </motion.div>
       </div>

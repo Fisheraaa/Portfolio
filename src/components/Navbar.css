@@ -14,13 +14,11 @@
   justify-content: space-between;
   padding: 0 clamp(22px, 7vw, 80px);
   border-bottom: 1px solid transparent;
-  /* 隐藏/显示的 transition */
   transition: transform .35s var(--ease-nav),
               background .3s,
               border-color .3s;
 }
 
-/* 滚动进内容后 → 磨砂玻璃 */
 .navbar.solid {
   background: rgba(4,5,14,0.88);
   backdrop-filter: saturate(140%) blur(12px);
@@ -28,7 +26,6 @@
   border-bottom-color: rgba(201,168,76,0.09);
 }
 
-/* 快速向下滚动 → 隐藏 */
 .navbar.nav-hidden {
   transform: translateY(-100%);
 }
@@ -75,14 +72,16 @@
   gap: 18px;
 }
 
-/* CV SVG 图标 + GitHub 图标 — f0xy 风格 */
 .nav-ic {
   display: inline-flex;
   align-items: center;
   color: var(--text-2);
   text-decoration: none;
-  transition: opacity .2s var(--ease-nav);
+  background: none;
+  border: none;
+  padding: 0;
   cursor: pointer;
+  transition: opacity .2s var(--ease-nav);
 }
 .nav-ic:hover { opacity: .5; }
 
@@ -162,6 +161,13 @@
   .mobile-nav-link:hover,
   .mobile-nav-link:active { color: var(--accent); }
 
+  /* CV 按钮在移动菜单里样式和链接一致 */
+  .mobile-nav-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
   .mobile-menu .lang-toggle {
     margin-top: 0;
     padding: 8px 20px;
@@ -172,4 +178,75 @@
 @keyframes menuSlideIn {
   from { opacity: 0; transform: translateY(-12px); }
   to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ─────────────────────────────────────────────
+   CV 语言选择弹窗
+   .modal-overlay / .modal-box 来自 globals.css
+   此处只做补充样式
+───────────────────────────────────────────── */
+.cv-modal {
+  max-width: 360px;
+  padding: 36px 32px 40px;
+  text-align: center;
+}
+
+.cv-modal-label {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 19px;
+  color: var(--text-2);
+  margin-bottom: 28px;
+  letter-spacing: 0.01em;
+}
+
+.cv-modal-btns {
+  display: flex;
+  gap: 14px;
+}
+
+.cv-lang-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 24px 14px 20px;
+  background: rgba(201,168,76,0.03);
+  border: 1px solid rgba(201,168,76,0.14);
+  border-radius: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background .2s, border-color .2s, transform .22s var(--ease-nav);
+}
+.cv-lang-btn:hover {
+  background: rgba(201,168,76,0.08);
+  border-color: rgba(201,168,76,0.52);
+  transform: translateY(-2px);
+}
+
+.cv-lang-char {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.cv-lang-name {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-1);
+  letter-spacing: 0.03em;
+}
+
+.cv-lang-sub {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-3);
+  letter-spacing: 0.09em;
 }

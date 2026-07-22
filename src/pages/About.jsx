@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
+import CvModal from '../components/CvModal';
 import { useTranslation } from 'react-i18next';
 import './About.css';
 
@@ -139,7 +141,7 @@ export default function About({ embedded=false }) {
   const tl       = isZh ? TL_ZH       : TL_EN;
   const cats     = isZh ? SKILL_CATS_ZH : SKILL_CATS_EN;
   const methods  = isZh ? METHODS_ZH  : METHODS_EN;
-  const resumeHref = `${import.meta.env.BASE_URL}resume.pdf`;
+  const [cvOpen, setCvOpen] = useState(false);
 
   return (
     <motion.section
@@ -276,14 +278,15 @@ export default function About({ embedded=false }) {
             <div className="cv-footer-label">Résumé</div>
             <div className="cv-footer-sub">{isZh?'点击下载完整简历 PDF':'Download the full résumé as PDF'}</div>
           </div>
-          <a id="resume-foot" href={resumeHref} target="_blank" rel="noopener" className="cv-download-btn">
+          <button className="cv-download-btn" onClick={() => setCvOpen(true)}>
             <svg viewBox="0 0 30 24" width="24" height="19" fill="none" aria-hidden="true">
               <rect x="1.2" y="1.2" width="27.6" height="21.6" rx="3.4" stroke="currentColor" strokeWidth="1.6"/>
               <text x="15" y="15.7" textAnchor="middle" fontSize="10.5" fontWeight="700" fill="currentColor">CV</text>
             </svg>
             <span>{isZh?'下载 PDF':'Download PDF'}</span>
             <span className="cv-btn-arr">↗</span>
-          </a>
+          </button>
+          <CvModal open={cvOpen} onClose={() => setCvOpen(false)} />
         </motion.div>
 
       </div>
